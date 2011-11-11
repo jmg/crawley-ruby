@@ -3,6 +3,10 @@ require 'response'
 require 'scrapers'
 
 class BaseCrawler
+    attr_accessor :debug
+    attr_accessor :max_depth
+    attr_accessor :start_urls
+    attr_accessor :scrapers
 
     def initialize start_urls, debug, max_depth
         @debug = debug
