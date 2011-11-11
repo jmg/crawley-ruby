@@ -34,6 +34,5 @@ class BaseCrawler
     end
 end
 
-
 crawler = BaseCrawler.new true 
 crawler.start
