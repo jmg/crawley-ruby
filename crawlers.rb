@@ -3,7 +3,10 @@ require 'response'
 require 'scrapers'
 
 class BaseCrawler
-            
+    
+    attr_accessor :debug
+    attr_accessor :scrapers
+
     def initialize debug
         @debug = debug
         @scrapers = [BaseScraper.new]
