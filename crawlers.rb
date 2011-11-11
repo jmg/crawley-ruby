@@ -31,7 +31,6 @@ class BaseCrawler
 
         manage_scrapers response
 
-
         get_urls response.html
     end
 
