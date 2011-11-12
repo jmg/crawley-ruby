@@ -13,7 +13,7 @@ class BaseCrawler
         @max_depth = max_depth
         @start_urls = start_urls
         @scrapers = [BaseScraper.new]
-        @url_regex = /((([a-z]+:\/\/)?|www\.)?[^\s()<>]+(?:\\([\w\d]+\\)|([^[:punct:]\s]|\/)))/    
+        @url_regex = /\b(([\w-]+:\/\/?|www[.])[^\s()<>]+(?:\\([\w\d]+\\)|([^[:punct:]\s]|\/)))/    
     end
 
     def manage_scrapers response
@@ -38,6 +38,9 @@ class BaseCrawler
         manage_scrapers response
 
         urls = get_urls response.html
+        
+        #FIXME
+        puts urls
 
         urls.each do |url|
           fetch url, depth + 1
@@ -55,5 +58,5 @@ class BaseCrawler
     end
 end
 
-crawler = BaseCrawler.new ["http://www.google.com.ar/"], true, 1
+crawler = BaseCrawler.new ["http://localhost/classes/BaseCrawler.html"], true, 1
 crawler.start
