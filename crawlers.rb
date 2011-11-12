@@ -13,7 +13,7 @@ class BaseCrawler
         @max_depth = max_depth
         @start_urls = start_urls
         @scrapers = [BaseScraper.new]
-        @url_regex = /\b(([\w-]+:\/\/?|www[.])[^\s()<>]+(?:\\([\w\d]+\\)|([^[:punct:]\s]|\/)))/    
+        @url_regex = /^((https?):\/\/)?([a-z\d]+([\-\.][a-z\d]+)*\.[a-z]{2,6})((:(\d{1,5}))?(\/.*)?)?$/ix  
     end
 
     def manage_scrapers response

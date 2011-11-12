@@ -14,7 +14,7 @@ class RegexTest < Test::Unit::TestCase
   end
 
   def test_crawley_regex
-    re = /((([a-z]+:\/\/)?|www\.)?[^\s()<>]+(?:\\([\w\d]+\\)|([^[:punct:]\s]|\/)))/    
+    re = /^((https?):\/\/)?([a-z\d]+([\-\.][a-z\d]+)*\.[a-z]{2,6})((:(\d{1,5}))?(\/.*)?)?$/ix
     assert_equal false, re.match("http://www.google.com/hola?=bleh").nil?
   end
 end
