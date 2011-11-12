@@ -3,6 +3,10 @@ require 'response'
 require 'scrapers'
 
 class BaseCrawler
+    attr_accessor :debug
+    attr_accessor :max_depth
+    attr_accessor :start_urls
+    attr_accessor :scrapers
 
     attr_accessor :start_urls
     attr_accessor :scrapers
@@ -23,22 +27,18 @@ class BaseCrawler
         @@scrapers = @@scrapers.each do |scraper|
             scraper
         end
-        @url_regex = /\b(([\w-]+:\/\/?|www[.])[^\s()<>]+(?:\\([\w\d]+\\)|([^[:punct:]\s]|\/)))/
+        @url_regex = /^((https?):\/\/)?([a-z\d]+([\-\.][a-z\d]+)*\.[a-z]{2,6})((:(\d{1,5}))?(\/.*)?)?$/ix  
     end
 
 
     def manage_scrapers response
         for scraper in @@scrapers
-            puts scraper
             scraper.scrape response
         end
     end
 
     def fetch url, depth
-
-        if depth > @@max_depth
-            return
-        end
+        return if depth > @max_depth
 
         url_obj = URI.parse url
         req = Net::HTTP::Get.new url_obj.path
