@@ -13,7 +13,7 @@ class BaseCrawler
         @max_depth = max_depth
         @start_urls = start_urls
         @scrapers = [BaseScraper.new]
-        @url_regex = "/\b(([\w-]+://?|www[.])[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/))/"
+        @url_regex = /((([a-z]+:\/\/)?|www\.)?[^\s()<>]+(?:\\([\w\d]+\\)|([^[:punct:]\s]|\/)))/    
     end
 
     def manage_scrapers response
@@ -22,7 +22,9 @@ class BaseCrawler
         end
     end
 
-    def fetch url
+    def fetch url, depth
+        return if depth > @max_depth
+
         url_obj = URI.parse url
         req = Net::HTTP::Get.new url_obj.path
         res = Net::HTTP.start(url_obj.host, url_obj.port) { |http|
@@ -35,23 +37,23 @@ class BaseCrawler
 
         manage_scrapers response
 
-        get_urls response.html
+        urls = get_urls response.html
+
+        urls.each do |url|
+          fetch url, depth + 1
+        end
     end
 
     def start
         @start_urls.each do |url|
-            fetch url
+            fetch url, 0
         end
     end
 
     def get_urls html
-        urls = html.scan @url_regex
-        urls.each do |url|
-            url + "sdsd"
-        end
+        html.scan @url_regex
     end
 end
-
 
 crawler = BaseCrawler.new ["http://www.google.com.ar/"], true, 1
 crawler.start
