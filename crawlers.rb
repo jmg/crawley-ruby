@@ -4,21 +4,42 @@ require 'scrapers'
 
 class BaseCrawler
 
-    def initialize start_urls, debug, max_depth
+    attr_accessor :start_urls
+    attr_accessor :scrapers
+    attr_accessor :max_depth
+
+    #add your starting urls here
+    @@start_urls = []
+
+    #add your scraper classes here
+    @@scrapers = []
+
+    #specify you maximum crawling depth level
+    @@max_depth = 0
+
+    def initialize debug
         @debug = debug
-        @max_depth = max_depth
-        @start_urls = start_urls
-        @scrapers = [BaseScraper.new]
-        @url_regex = "/\b(([\w-]+://?|www[.])[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/))/"
+
+        @@scrapers = @@scrapers.each do |scraper|
+            scraper
+        end
+        @url_regex = /\b(([\w-]+:\/\/?|www[.])[^\s()<>]+(?:\\([\w\d]+\\)|([^[:punct:]\s]|\/)))/
     end
 
+
     def manage_scrapers response
-        for scraper in @scrapers
+        for scraper in @@scrapers
+            puts scraper
             scraper.scrape response
         end
     end
 
-    def fetch url
+    def fetch url, depth
+
+        if depth > @@max_depth
+            return
+        end
+
         url_obj = URI.parse url
         req = Net::HTTP::Get.new url_obj.path
         res = Net::HTTP.start(url_obj.host, url_obj.port) { |http|
@@ -31,23 +52,23 @@ class BaseCrawler
 
         manage_scrapers response
 
-        get_urls response.html
+        urls = get_urls response.html
+
+        #FIXME
+        puts urls
+
+        urls.each do |url|
+            fetch url, depth + 1
+        end
     end
 
     def start
-        @start_urls.each do |url|
-            fetch url
+        @@start_urls.each do |url|
+            fetch url, 0
         end
     end
 
     def get_urls html
-        urls = html.scan @url_regex
-        urls.each do |url|
-            url + "sdsd"
-        end
+        html.scan @url_regex
     end
 end
-
-
-crawler = BaseCrawler.new ["http://www.google.com.ar/"], true, 1
-crawler.start
