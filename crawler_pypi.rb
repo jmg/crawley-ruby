@@ -6,7 +6,7 @@ class PypiScraper < BaseScraper
     @@matching_urls = ["%pypi.python.org/pypi/%"]
 
     def scrape response
-        puts response.url + " ->" + response.html
+        puts response.url
     end
 end
 

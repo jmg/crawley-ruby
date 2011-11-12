@@ -1,13 +1,13 @@
 require 'net/http'
+require 'rubygems'
+require 'mechanize'
+
 require 'response'
 require 'scrapers'
 
 class BaseCrawler
-    attr_accessor :debug
-    attr_accessor :max_depth
-    attr_accessor :start_urls
-    attr_accessor :scrapers
 
+    attr_accessor :debug
     attr_accessor :start_urls
     attr_accessor :scrapers
     attr_accessor :max_depth
@@ -27,7 +27,8 @@ class BaseCrawler
         @@scrapers = @@scrapers.each do |scraper|
             scraper
         end
-        @url_regex = /^((https?):\/\/)?([a-z\d]+([\-\.][a-z\d]+)*\.[a-z]{2,6})((:(\d{1,5}))?(\/.*)?)?$/ix  
+
+        @url_regex = /^((https?):\/\/)?([a-z\d]+([\-\.][a-z\d]+)*\.[a-z]{2,6})((:(\d{1,5}))?(\/.*)?)?$/ix
     end
 
 
@@ -37,28 +38,31 @@ class BaseCrawler
         end
     end
 
-    def fetch url, depth
-        return if depth > @max_depth
+    def get_response url
 
-        url_obj = URI.parse url
-        req = Net::HTTP::Get.new url_obj.path
-        res = Net::HTTP.start(url_obj.host, url_obj.port) { |http|
-            http.request req
-        }
+        agent = Mechanize.new
+        agent.user_agent = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.1.4) Gecko/20091016 Firefox/3.5.4'
+        html = agent.get url
 
         response = Response.new
-        response.html = res.body
+        response.html = html
         response.url = url
+        response
+    end
 
+    def fetch url, depth
+
+        return if depth > @@max_depth
+
+        response = get_response url
         manage_scrapers response
 
-        urls = get_urls response.html
-
-        #FIXME
+        urls = get_urls response
         puts urls
-
         urls.each do |url|
-            fetch url, depth + 1
+            return if url.href.nil? or not @url_regex.match url.href
+            puts url.href
+            fetch url.href, depth + 1
         end
     end
 
@@ -68,7 +72,7 @@ class BaseCrawler
         end
     end
 
-    def get_urls html
-        html.scan @url_regex
+    def get_urls response
+        response.html.links
     end
 end
