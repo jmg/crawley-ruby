@@ -3,17 +3,18 @@ require 'scrapers'
 
 class PypiScraper < BaseScraper
 
-    @@matching_urls = ["%pypi.python.org/pypi/%"]
+    @@matching_urls = ["%localhost%"]
 
     def scrape response
-        puts response.url
+        puts "dsd"
+        super().scrape response
     end
 end
 
 class PypiCrawler < BaseCrawler
 
     #add your starting urls here
-    @@start_urls = ["http://pypi.python.org/pypi"]
+    @@start_urls = ["http://localhost:8000"]
 
     #add your scraper classes here
     @@scrapers = [PypiScraper.new]

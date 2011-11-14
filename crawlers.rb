@@ -31,7 +31,6 @@ class BaseCrawler
         @url_regex = /^((https?):\/\/)?([a-z\d]+([\-\.][a-z\d]+)*\.[a-z]{2,6})((:(\d{1,5}))?(\/.*)?)?$/ix
     end
 
-
     def manage_scrapers response
         for scraper in @@scrapers
             scraper.scrape response
@@ -58,11 +57,16 @@ class BaseCrawler
         manage_scrapers response
 
         urls = get_urls response
-        puts urls
         urls.each do |url|
-            return if url.href.nil? or not @url_regex.match url.href
+
+            next if url.href.nil? or not @url_regex.match url.href
+
             puts url.href
-            fetch url.href, depth + 1
+            begin
+                fetch url.href, depth + 1
+            rescue
+
+            end
         end
     end
 
