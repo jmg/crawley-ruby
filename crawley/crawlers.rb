@@ -6,14 +6,11 @@ require 'response'
 require 'scrapers'
 
 class BaseCrawler
-
-    #add your starting urls here
+    
     @@start_urls = []
 
-    #add your scraper classes here
     @@scrapers = []
 
-    #specify you maximum crawling depth level
     @@max_depth = 0
 
     def initialize debug
@@ -37,11 +34,7 @@ class BaseCrawler
         agent = Mechanize.new
         agent.user_agent = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.1.4) Gecko/20091016 Firefox/3.5.4'
         
-        begin
-            html = agent.get url
-        rescue
-            return nil
-        end
+        html = agent.get url        
 
         response = Response.new
         response.html = html
@@ -52,9 +45,12 @@ class BaseCrawler
     def fetch url, depth=0
 
         return if depth > @@max_depth
-
-        response = get_response url
-        return if response.nil?
+        
+        begin
+            response = get_response url
+        rescue
+            return
+        end
         
         manage_scrapers response
 

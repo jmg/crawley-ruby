@@ -3,6 +3,5 @@ require 'commands/commands'
 
 options = {}
 
-cmd = Commands[ARGV[0]].new
-cmd.run
-
+cmd = Commands.get ARGV[0]
+cmd.new.run

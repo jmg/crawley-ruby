@@ -1,3 +1,4 @@
 require './commands/run'
+require 'utils'
 
-Commands = {RunCommand::name => RunCommand}
+Commands = CustomHash.new({RunCommand::name => RunCommand})
