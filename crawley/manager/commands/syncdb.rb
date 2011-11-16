@@ -1,15 +1,15 @@
 require 'crawley/manager/commands/base'
 
-class RunCommand < Command
+class SyncdbCommand < Command
     
-    @@name = "run"
+    @@name = "syncdb"
     
     def self.name
         @@name
     end
     
     def run
-        puts "run cmd"
+        puts "sycdb cmd"
     end
     
 end

@@ -1,7 +1,5 @@
-$LOAD_PATH << '../crawley'
-
-require 'crawlers'
-require 'scrapers'
+require 'crawley/crawlers'
+require 'crawley/scrapers'
 
 class PypiScraper < BaseScraper
 

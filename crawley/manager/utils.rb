@@ -5,7 +5,7 @@ class CustomHash
     end
     
     def get cmd_name
-    
+                
         cmd = @commands[cmd_name]
         
         if cmd.nil?

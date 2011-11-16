@@ -1,7 +1,9 @@
 require 'optparse'
-require 'commands/commands'
+require 'crawley/manager/commands/commands'
 
 options = {}
 
-cmd = Commands.get ARGV[0]
-cmd.new.run
+def manage
+    cmd = Commands.get ARGV[0]
+    cmd.new.run
+end
