@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
     s.summary     = "Crawley!"
     s.authors     = ["Crawley Developers"]
     s.email       = 'jmg.utn@gmail.com'
-    s.files       = ["crawley/"]
+    s.files       = Dir.glob("{crawley}/**/*")
     s.executables = "rcrawley"
     s.homepage    = 'http://github.com/jmg/crawley-ruby'
 end
