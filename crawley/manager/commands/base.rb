@@ -1,4 +1,7 @@
-class Command 
-    
+module crawley
+
+    class Command 
+        
+    end
 end
 

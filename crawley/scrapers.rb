@@ -1,6 +1,9 @@
-class BaseScraper
+module crawley
 
-    def scrape response
-        puts "scraping -> " + response.url
+    class BaseScraper
+
+        def scrape response
+            puts "scraping -> " + response.url
+        end
     end
 end
