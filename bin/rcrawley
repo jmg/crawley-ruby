@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+require 'crawley/manager/manager'
+manage
