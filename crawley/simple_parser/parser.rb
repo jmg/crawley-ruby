@@ -51,7 +51,7 @@ class Crawler
     end
 end
 
-def url urls, &table_block
+def crawl urls, &table_block
     @crawlers = []
     @scrapers_hash = Hash.new
     table_block.call
@@ -83,7 +83,7 @@ def field field_name, &selector_block
 end
 
 if __FILE__ == $0
-    url "http://pypi.python.org/pypi/cilantro/0.9b4" do
+    crawl "http://pypi.python.org/pypi/cilantro/0.9b4" do
         table "MI_TABLA" do
             field "MI_CAMPO_0" do
                 "/html/body/div[5]/div/div/div[3]/ul/li/span"
