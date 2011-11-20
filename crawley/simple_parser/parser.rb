@@ -3,6 +3,7 @@ require 'data_mapper'
 require 'dm-migrations'
 
 @selectors_hash = Hash.new
+@scrapers_hash = Hash.new
 @crawlers = []
 
 class Table
@@ -52,12 +53,14 @@ end
 
 def url urls, &table_block
     @crawlers = []
+    @scrapers_hash = Hash.new
+    table_block.call
     if urls.respond_to? :each
         urls.each do |an_url|
-            _add_crawlers table_block, an_url
+            _add_crawlers an_url
         end
     else
-        _add_crawlers table_block, urls
+        _add_crawlers urls
     end
 
     @crawlers.each do |crawler|
@@ -65,16 +68,14 @@ def url urls, &table_block
     end
 end
 
-def _add_crawlers table_block, urls
-    @crawlers.push Crawler.new table_block.call.values, urls
+def _add_crawlers urls
+    @crawlers.push Crawler.new @scrapers_hash.values, urls
 end
 
 def table table_name, &fields_block
     @selectors_hash = Hash.new
-    scrapers_hash = Hash.new
     fields_block.call
-    scrapers_hash[table_name] = Scraper.new @selectors_hash, Table.new(table_name, @selectors_hash) 
-    scrapers_hash
+    @scrapers_hash[table_name] = Scraper.new @selectors_hash, Table.new(table_name, @selectors_hash) 
 end
 
 def field field_name, &selector_block
