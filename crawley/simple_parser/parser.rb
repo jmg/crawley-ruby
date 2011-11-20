@@ -16,7 +16,6 @@ class Table
         selectors.keys.each do |key|
             Table.property key, key.class 
         end
-        puts instance_variables
     end
 end
 
