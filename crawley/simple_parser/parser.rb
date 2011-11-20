@@ -14,7 +14,7 @@ class Table
         @name = name
         Table.storage_names[:default] = @name
         selectors.keys.each do |key|
-            Table.property(key, key.class) 
+            Table.property key, key.class 
         end
         puts instance_variables
     end
