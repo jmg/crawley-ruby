@@ -1,10 +1,22 @@
+require 'rubygems'
+require 'data_mapper'
+require 'dm-migrations'
+
 @selectors_hash = Hash.new
 @crawlers = []
 
 class Table
+    include DataMapper::Resource 
+
+    property :id, Serial
+
     def initialize name, selectors
         @name = name
-        @fields = selectors.keys
+        Table.storage_names[:default] = @name
+        selectors.keys.each do |key|
+            Table.property(key, key.class) 
+        end
+        puts instance_variables
     end
 end
 
@@ -29,6 +41,13 @@ class Crawler
                 puts selector
             end
         end
+        
+        DataMapper::Logger.new($stdout, :debug)
+        DataMapper.setup(:default, 'sqlite::memory:')
+
+        DataMapper.setup(:default, 'sqlite:///' + Dir.pwd + '/base.db')
+
+        DataMapper.auto_migrate!
     end
 end
 
@@ -63,19 +82,20 @@ def field field_name, &selector_block
     @selectors_hash[field_name] = selector_block.call
 end
 
+if __FILE__ == $0
+    url "http://pypi.python.org/pypi/cilantro/0.9b4" do
+        table "MI_TABLA" do
+            field "MI_CAMPO_0" do
+                "/html/body/div[5]/div/div/div[3]/ul/li/span"
+            end
 
-url "http://pypi.python.org/pypi/cilantro/0.9b4" do
-    table "MI_TABLA" do
-        field "MI_CAMPO_0" do
-            "/html/body/div[5]/div/div/div[3]/ul/li/span"
-        end
+            field "MI_CAMPO_1" do
+                "/html/body/div[5]/div/div/div[3]/ul/li[3]/span"
+            end
 
-        field "MI_CAMPO_1" do
-            "/html/body/div[5]/div/div/div[3]/ul/li[3]/span"
-        end
-
-        field "MI_CAMPO_2" do
-            "/html/body/div[5]/div/div/div[3]/ul/li[4]/span"
+            field "MI_CAMPO_2" do
+                "/html/body/div[5]/div/div/div[3]/ul/li[4]/span"
+            end
         end
     end
 end
