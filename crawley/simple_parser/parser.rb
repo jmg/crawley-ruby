@@ -5,6 +5,7 @@ require 'dm-migrations'
 @selectors_hash = Hash.new
 @scrapers_hash = Hash.new
 @crawlers = []
+@max_depth = 0
 
 class Table
     include DataMapper::Resource 
@@ -30,9 +31,10 @@ class Scraper
 end
 
 class Crawler
-    def initialize scrapers, urls
+    def initialize scrapers, urls, max_depth
         @scrapers = scrapers
         @urls = urls
+        @max_depth = max_depth
     end
 
     def run
@@ -42,6 +44,8 @@ class Crawler
             end
         end
         
+        puts @max_depth
+
         DataMapper::Logger.new($stdout, :debug)
         DataMapper.setup(:default, 'sqlite::memory:')
 
@@ -57,10 +61,10 @@ def crawl urls, &table_block
     table_block.call
     if urls.respond_to? :each
         urls.each do |an_url|
-            _add_crawlers an_url
+            _add_crawlers an_url, @max_depth
         end
     else
-        _add_crawlers urls
+        _add_crawlers urls, @max_depth
     end
 
     @crawlers.each do |crawler|
@@ -68,8 +72,12 @@ def crawl urls, &table_block
     end
 end
 
-def _add_crawlers urls
-    @crawlers.push Crawler.new @scrapers_hash.values, urls
+def _add_crawlers urls, max_depth
+    @crawlers.push Crawler.new @scrapers_hash.values, urls, max_depth
+end
+
+def max_depth depth
+    @max_depth = depth
 end
 
 def table table_name, &fields_block
@@ -84,6 +92,8 @@ end
 
 if __FILE__ == $0
     crawl "http://pypi.python.org/pypi/cilantro/0.9b4" do
+        max_depth 2
+
         table "MI_TABLA" do
             field "MI_CAMPO_0" do
                 "/html/body/div[5]/div/div/div[3]/ul/li/span"
