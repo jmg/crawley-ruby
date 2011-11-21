@@ -94,6 +94,28 @@ if __FILE__ == $0
     crawl "http://pypi.python.org/pypi/cilantro/0.9b4" do
         max_depth 2
 
+        #TODO
+        #allowed_urls []
+        #black_list []
+        #max_concurrency_level 1000
+        #requests_delay 1000
+        #requests_deviation 1000
+        #post_url "url" do
+        #   param "nombre" do
+        #       "value"
+        #   end
+        #   ...
+        #end
+        #login "login_url" do
+        #   user "username"
+        #   password "password"
+        #   param "nombre" do
+        #       "value"
+        #   end
+        #   ...
+        #end
+        #search_all_urls true
+
         table "MI_TABLA" do
             field "MI_CAMPO_0" do
                 "/html/body/div[5]/div/div/div[3]/ul/li/span"
