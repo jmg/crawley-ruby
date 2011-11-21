@@ -4,6 +4,9 @@ require 'dm-migrations'
 
 @selectors_hash = Hash.new
 @scrapers_hash = Hash.new
+@post_hash = Hash.new
+@login_hash = Hash.new
+@login_data = Hash.new
 @crawlers = []
 @allowed_urls = []
 @black_list = []
@@ -40,7 +43,8 @@ class Crawler
     def initialize scrapers, urls, max_depth, 
                    allowed_urls, black_list, 
                    max_concurrency_level, requests_delay,
-                   requests_deviation, search_all_urls
+                   requests_deviation, search_all_urls,
+                   login#, post
         @scrapers = scrapers
         @urls = urls
         @max_depth = max_depth
@@ -50,6 +54,7 @@ class Crawler
         @requests_delay = requests_delay
         @requests_deviation = requests_deviation
         @search_all_urls = search_all_urls
+        @login = login
     end
 
     def run
@@ -77,6 +82,7 @@ def crawl urls, &table_block
     @requests_delay = 100
     @requests_deviation = 300
     @scrapers_hash = Hash.new
+    @post_hash = Hash.new
     @search_all_urls = true
     table_block.call
     if urls.respond_to? :each
@@ -84,13 +90,13 @@ def crawl urls, &table_block
             _add_crawlers an_url, @max_depth, @allowed_urls, 
                                   @black_list, @max_concurrency_level,
                                   @requests_delay, @requests_deviation,
-                                  @search_all_urls
+                                  @search_all_urls, @login_hash
         end
     else
         _add_crawlers urls, @max_depth, @allowed_urls, 
                             @black_list, @max_concurrency_level,
                             @requests_delay, @requests_deviation,
-                            @search_all_urls
+                            @search_all_urls, @login_hash
     end
 
     @crawlers.each do |crawler|
@@ -101,12 +107,13 @@ end
 def _add_crawlers urls, max_depth,
                   allowed_urls, black_list, 
                   max_concurrency_level, requests_delay,
-                  requests_deviation, search_all_urls
+                  requests_deviation, search_all_urls,
+                  login
     @crawlers.push Crawler.new @scrapers_hash.values, urls, 
                                max_depth, allowed_urls,
                                black_list, max_concurrency_level,
                                requests_delay, requests_deviation,
-                               search_all_urls
+                               search_all_urls, login
 end
 
 def max_depth depth=0
@@ -137,6 +144,33 @@ def search_all_urls a_boolean=true
     @search_all_urls = a_boolean
 end
 
+def login login_url, &login_block
+    @login_hash = Hash.new
+    @login_data = Hash.new
+    login_block.call
+    @login_hash[login_url] = @login_data
+end
+
+def username user_name, default_field_name="user"
+    @login_hash[default_field_name] = user_name
+end
+
+def password pass, default_field_name="pass"
+    @login_hash[default_field_name] = pass
+end
+
+def login_param param_name, &param_value_block
+    @login_data[param_name] = param_value_block.call
+end
+
+def post url, &post_params_block
+
+end
+
+def param param_name, &param_value_block
+
+end
+
 def table table_name, &fields_block
     @selectors_hash = Hash.new
     fields_block.call
@@ -157,16 +191,17 @@ if __FILE__ == $0
         requests_deviation 1000
         search_all_urls
 
+        login "login_url" do
+           username "username"
+           password "password"
+           login_param "nombre" do
+               "value"
+           end
+        #  ...
+        end
+
         #TODO
-        #post_url "url" do
-        #   param "nombre" do
-        #       "value"
-        #   end
-        #   ...
-        #end
-        #login "login_url" do
-        #   user "username"
-        #   password "password"
+        #post "url" do
         #   param "nombre" do
         #       "value"
         #   end
