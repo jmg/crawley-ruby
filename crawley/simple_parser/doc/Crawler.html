@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>Class: Crawler</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>parser.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link"><a href="Object.html">Object</a>
+  
+</nav>
+
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-c-new">::new</a>
+    
+    <li><a href="#method-i-run">#run</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./Crawler.html">Crawler</a>
+  
+    <li><a href="./Object.html">Object</a>
+  
+    <li><a href="./Scraper.html">Scraper</a>
+  
+    <li><a href="./Table.html">Table</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class Crawler</h1>
+
+  <div id="description" class="description">
+    
+<p>Mock implementation of <a href="Crawler.html">Crawler</a> class</p>
+
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(scrapers, urls, max_depth, allowed_urls, black_list, max_concurrency_level, requests_delay, requests_deviation, search_all_urls, login, post)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File parser.rb, line 46</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> <span class="ruby-identifier">scrapers</span>, <span class="ruby-identifier">urls</span>, <span class="ruby-identifier">max_depth</span>, 
+               <span class="ruby-identifier">allowed_urls</span>, <span class="ruby-identifier">black_list</span>, 
+               <span class="ruby-identifier">max_concurrency_level</span>, <span class="ruby-identifier">requests_delay</span>,
+               <span class="ruby-identifier">requests_deviation</span>, <span class="ruby-identifier">search_all_urls</span>,
+               <span class="ruby-identifier">login</span>, <span class="ruby-identifier">post</span>
+    <span class="ruby-ivar">@scrapers</span> = <span class="ruby-identifier">scrapers</span>
+    <span class="ruby-ivar">@urls</span> = <span class="ruby-identifier">urls</span>
+    <span class="ruby-ivar">@max_depth</span> = <span class="ruby-identifier">max_depth</span>
+    <span class="ruby-ivar">@allowed_urls</span> = <span class="ruby-identifier">allowed_urls</span>
+    <span class="ruby-ivar">@black_list</span> = <span class="ruby-identifier">black_list</span>
+    <span class="ruby-ivar">@max_concurrency_level</span> = <span class="ruby-identifier">max_concurrency_level</span>
+    <span class="ruby-ivar">@requests_delay</span> = <span class="ruby-identifier">requests_delay</span>
+    <span class="ruby-ivar">@requests_deviation</span> = <span class="ruby-identifier">requests_deviation</span>
+    <span class="ruby-ivar">@search_all_urls</span> = <span class="ruby-identifier">search_all_urls</span>
+    <span class="ruby-ivar">@login</span> = <span class="ruby-identifier">login</span>
+    <span class="ruby-ivar">@post</span> = <span class="ruby-identifier">post</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- new-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- new-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-run" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">run</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="run-source">
+            <pre><span class="ruby-comment"># File parser.rb, line 64</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">run</span>
+    <span class="ruby-ivar">@scrapers</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">scraper</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">scraper</span>.<span class="ruby-identifier">selectors</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">selector</span><span class="ruby-operator">|</span>
+            <span class="ruby-identifier">puts</span> <span class="ruby-identifier">selector</span>
+        <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+    
+    <span class="ruby-identifier">puts</span> <span class="ruby-ivar">@max_depth</span>
+
+    <span class="ruby-constant">DataMapper</span><span class="ruby-operator">::</span><span class="ruby-constant">Logger</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">$stdout</span>, <span class="ruby-value">:debug</span>)
+    <span class="ruby-constant">DataMapper</span>.<span class="ruby-identifier">setup</span>(<span class="ruby-value">:default</span>, <span class="ruby-string">'sqlite::memory:'</span>)
+    <span class="ruby-constant">DataMapper</span>.<span class="ruby-identifier">setup</span>(<span class="ruby-value">:default</span>, <span class="ruby-string">'sqlite:///'</span> <span class="ruby-operator">+</span> <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">pwd</span> <span class="ruby-operator">+</span> <span class="ruby-string">'/base.db'</span>)
+    <span class="ruby-constant">DataMapper</span>.<span class="ruby-identifier">auto_migrate!</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- run-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- run-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.11.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

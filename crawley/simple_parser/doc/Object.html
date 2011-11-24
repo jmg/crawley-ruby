@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>Class: Object</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>parser.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link">BasicObject
+  
+</nav>
+
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-i-_add_crawlers">#_add_crawlers</a>
+    
+    <li><a href="#method-i-allowed_urls">#allowed_urls</a>
+    
+    <li><a href="#method-i-black_list">#black_list</a>
+    
+    <li><a href="#method-i-crawl">#crawl</a>
+    
+    <li><a href="#method-i-field">#field</a>
+    
+    <li><a href="#method-i-login">#login</a>
+    
+    <li><a href="#method-i-login_param">#login_param</a>
+    
+    <li><a href="#method-i-max_concurrency_level">#max_concurrency_level</a>
+    
+    <li><a href="#method-i-max_depth">#max_depth</a>
+    
+    <li><a href="#method-i-param">#param</a>
+    
+    <li><a href="#method-i-password">#password</a>
+    
+    <li><a href="#method-i-post">#post</a>
+    
+    <li><a href="#method-i-requests_delay">#requests_delay</a>
+    
+    <li><a href="#method-i-requests_deviation">#requests_deviation</a>
+    
+    <li><a href="#method-i-search_all_urls">#search_all_urls</a>
+    
+    <li><a href="#method-i-table">#table</a>
+    
+    <li><a href="#method-i-username">#username</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./Crawler.html">Crawler</a>
+  
+    <li><a href="./Object.html">Object</a>
+  
+    <li><a href="./Scraper.html">Scraper</a>
+  
+    <li><a href="./Table.html">Table</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class Object</h1>
+
+  <div id="description" class="description">
+    
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-_add_crawlers" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">_add_crawlers</span><span
+            class="method-args">(urls, max_depth, allowed_urls, black_list, max_concurrency_level, requests_delay, requests_deviation, search_all_urls, login, post)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Private Method</p>
+
+<p>Action:</p>
+
+<pre>Creates and adds the crawler to the crawlers list</pre>
+          
+
+          
+          <div class="method-source-code" id="_add_crawlers-source">
+            <pre><span class="ruby-comment"># File parser.rb, line 139</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">_add_crawlers</span> <span class="ruby-identifier">urls</span>, <span class="ruby-identifier">max_depth</span>,
+                  <span class="ruby-identifier">allowed_urls</span>, <span class="ruby-identifier">black_list</span>, 
+                  <span class="ruby-identifier">max_concurrency_level</span>, <span class="ruby-identifier">requests_delay</span>,
+                  <span class="ruby-identifier">requests_deviation</span>, <span class="ruby-identifier">search_all_urls</span>,
+                  <span class="ruby-identifier">login</span>, <span class="ruby-identifier">post</span>
+    <span class="ruby-ivar">@crawlers</span>.<span class="ruby-identifier">push</span> <span class="ruby-constant">Crawler</span>.<span class="ruby-identifier">new</span> <span class="ruby-ivar">@scrapers_hash</span>.<span class="ruby-identifier">values</span>, <span class="ruby-identifier">urls</span>, 
+                               <span class="ruby-identifier">max_depth</span>, <span class="ruby-identifier">allowed_urls</span>,
+                               <span class="ruby-identifier">black_list</span>, <span class="ruby-identifier">max_concurrency_level</span>,
+                               <span class="ruby-identifier">requests_delay</span>, <span class="ruby-identifier">requests_deviation</span>,
+                               <span class="ruby-identifier">search_all_urls</span>, <span class="ruby-identifier">login</span>, <span class="ruby-identifier">post</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- _add_crawlers-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- _add_crawlers-method -->
+
+    
+      <div id="method-i-allowed_urls" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">allowed_urls</span><span
+            class="method-args">(url_list=[])</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Public Method</p>
+
+<p>Params:</p>
+
+<pre>url_list: A list of the whitelisted URLs for scraping, the default value is
+any URL</pre>
+
+<p>Actions:</p>
+
+<pre>Sets the URL whitelist</pre>
+          
+
+          
+          <div class="method-source-code" id="allowed_urls-source">
+            <pre><span class="ruby-comment"># File parser.rb, line 205</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">allowed_urls</span> <span class="ruby-identifier">url_list</span>=[]
+    <span class="ruby-ivar">@allowed_urls</span> = <span class="ruby-identifier">url_list</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- allowed_urls-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- allowed_urls-method -->
+
+    
+      <div id="method-i-black_list" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">black_list</span><span
+            class="method-args">(url_list=[])</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Public Method</p>
+
+<p>Params:</p>
+
+<pre>url_list: A list of the blacklisted URLs for scraping, the default value is
+none</pre>
+
+<p>Actions:</p>
+
+<pre>Sets the URL blacklist</pre>
+          
+
+          
+          <div class="method-source-code" id="black_list-source">
+            <pre><span class="ruby-comment"># File parser.rb, line 217</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">black_list</span> <span class="ruby-identifier">url_list</span>=[]
+    <span class="ruby-ivar">@black_list</span> = <span class="ruby-identifier">url_list</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- black_list-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- black_list-method -->
+
+    
+      <div id="method-i-crawl" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">crawl</span><span
+            class="method-args">(urls, &table_block)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Public Method</p>
+
+<p>Parameters:</p>
+
+<pre>urls:           A String or String Array of the URLs to Crawl
+table_block:    A Block containing the rest of the DSL</pre>
+
+<p>Returns:</p>
+
+<pre>nil</pre>
+
+<p>Example:</p>
+
+<pre>crawl &quot;http://www.google.com&quot; do
+    table &quot;GOOGLE_DATA&quot; do
+        field &quot;urls&quot; do
+            &quot;a/valid/xpath/to/some/google/url&quot;
+        end
+        #...
+    end
+    #...
+end</pre>
+
+<p>Action:</p>
+
+<pre>Creates the DataBase, Scrapers and Crawlers for the requested data
+structure and launches the crawler</pre>
+          
+
+          
+          <div class="method-source-code" id="crawl-source">
+            <pre><span class="ruby-comment"># File parser.rb, line 104</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">crawl</span> <span class="ruby-identifier">urls</span>, &amp;<span class="ruby-identifier">table_block</span>
+    <span class="ruby-ivar">@crawlers</span> = []
+    <span class="ruby-ivar">@allowed_urls</span> = []
+    <span class="ruby-ivar">@black_list</span> = []
+    <span class="ruby-ivar">@max_depth</span> = <span class="ruby-value">0</span>
+    <span class="ruby-ivar">@max_concurrency_level</span> = <span class="ruby-value">25</span>
+    <span class="ruby-ivar">@requests_delay</span> = <span class="ruby-value">100</span>
+    <span class="ruby-ivar">@requests_deviation</span> = <span class="ruby-value">300</span>
+    <span class="ruby-ivar">@scrapers_hash</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-ivar">@post_hash</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-ivar">@search_all_urls</span> = <span class="ruby-keyword">true</span>
+    <span class="ruby-identifier">table_block</span>.<span class="ruby-identifier">call</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">urls</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-value">:each</span>
+        <span class="ruby-identifier">urls</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">an_url</span><span class="ruby-operator">|</span>
+            <span class="ruby-identifier">_add_crawlers</span> <span class="ruby-identifier">an_url</span>, <span class="ruby-ivar">@max_depth</span>, <span class="ruby-ivar">@allowed_urls</span>, 
+                                  <span class="ruby-ivar">@black_list</span>, <span class="ruby-ivar">@max_concurrency_level</span>,
+                                  <span class="ruby-ivar">@requests_delay</span>, <span class="ruby-ivar">@requests_deviation</span>,
+                                  <span class="ruby-ivar">@search_all_urls</span>, <span class="ruby-ivar">@login_hash</span>, <span class="ruby-ivar">@post_hash</span>
+        <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">_add_crawlers</span> <span class="ruby-identifier">urls</span>, <span class="ruby-ivar">@max_depth</span>, <span class="ruby-ivar">@allowed_urls</span>, 
+                            <span class="ruby-ivar">@black_list</span>, <span class="ruby-ivar">@max_concurrency_level</span>,
+                            <span class="ruby-ivar">@requests_delay</span>, <span class="ruby-ivar">@requests_deviation</span>,
+                            <span class="ruby-ivar">@search_all_urls</span>, <span class="ruby-ivar">@login_hash</span>, <span class="ruby-ivar">@post_hash</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-ivar">@crawlers</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">crawler</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">crawler</span>.<span class="ruby-identifier">run</span>
+    <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- crawl-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- crawl-method -->
+
+    
+      <div id="method-i-field" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">field</span><span
+            class="method-args">(field_name, &selector_block)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Public Method</p>
+
+<p>Params:</p>
+
+<pre>field_name: A String with the field's name
+
+selector_block: A Block containing a valid XPath selector</pre>
+
+<p>Actions:</p>
+
+<pre>Sets the fields data for generating the tables and scrapers, must be inside
+a table statement</pre>
+          
+
+          
+          <div class="method-source-code" id="field-source">
+            <pre><span class="ruby-comment"># File parser.rb, line 378</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">field</span> <span class="ruby-identifier">field_name</span>, &amp;<span class="ruby-identifier">selector_block</span>
+    <span class="ruby-ivar">@selectors_hash</span>[<span class="ruby-identifier">field_name</span>] = <span class="ruby-identifier">selector_block</span>.<span class="ruby-identifier">call</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- field-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- field-method -->
+
+    
+      <div id="method-i-login" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">login</span><span
+            class="method-args">(login_url, &login_block)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Public Method</p>
+
+<p>Params:</p>
+
+<pre>login_url: The first URL the crawler will use, it will authenticate to it
+using the parameters given in the login_block
+
+login_block: A Block containing Login data</pre>
+
+<p>Example:</p>
+
+<pre>crawl &quot;somewhere&quot; do
+    login &quot;login_url&quot; do
+        username &quot;my_user&quot;
+        password &quot;my_password&quot;
+        #...
+    end
+    #...
+end</pre>
+
+<p>Action:</p>
+
+<pre>Sets the login data for the crawler, must be inside the crawl statement</pre>
+          
+
+          
+          <div class="method-source-code" id="login-source">
+            <pre><span class="ruby-comment"># File parser.rb, line 253</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">login</span> <span class="ruby-identifier">login_url</span>, &amp;<span class="ruby-identifier">login_block</span>
+    <span class="ruby-ivar">@login_hash</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-ivar">@login_data</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-identifier">login_block</span>.<span class="ruby-identifier">call</span>
+    <span class="ruby-ivar">@login_hash</span>[<span class="ruby-identifier">login_url</span>] = <span class="ruby-ivar">@login_data</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- login-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- login-method -->
+
+    
+      <div id="method-i-login_param" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">login_param</span><span
+            class="method-args">(param_name, &param_value_block)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Public Method</p>
+
+<p>Params:</p>
+
+<pre>param_name: Additional Login parameter name
+
+param_value_block: A Block containing the fields value</pre>
+
+<p>Actions:</p>
+
+<pre>Sets any additional parameter for the login data, must be inside the login
+statement</pre>
+          
+
+          
+          <div class="method-source-code" id="login_param-source">
+            <pre><span class="ruby-comment"># File parser.rb, line 298</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">login_param</span> <span class="ruby-identifier">param_name</span>, &amp;<span class="ruby-identifier">param_value_block</span>
+    <span class="ruby-ivar">@login_data</span>[<span class="ruby-identifier">param_name</span>] = <span class="ruby-identifier">param_value_block</span>.<span class="ruby-identifier">call</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- login_param-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- login_param-method -->
+
+    
+      <div id="method-i-max_concurrency_level" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">max_concurrency_level</span><span
+            class="method-args">(level=25)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Public Method</p>
+
+<p>Params:</p>
+
+<pre>level: The maximum concurrency level of the crawler threads</pre>
+
+<p>Action:</p>
+
+<pre>Sets the maximum concurrency level of the crawler threads, must be inside
+the crawl statement</pre>
+          
+
+          
+          <div class="method-source-code" id="max_concurrency_level-source">
+            <pre><span class="ruby-comment"># File parser.rb, line 170</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">max_concurrency_level</span> <span class="ruby-identifier">level</span>=<span class="ruby-value">25</span>
+    <span class="ruby-ivar">@max_concurrency_level</span> = <span class="ruby-identifier">level</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- max_concurrency_level-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- max_concurrency_level-method -->
+
+    
+      <div id="method-i-max_depth" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">max_depth</span><span
+            class="method-args">(depth=0)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Public Method</p>
+
+<p>Params:</p>
+
+<pre>depth: The maximum depth of the crawler</pre>
+
+<p>Action:</p>
+
+<pre>Sets the maximum depth of the crawler, must be inside the crawl statement</pre>
+          
+
+          
+          <div class="method-source-code" id="max_depth-source">
+            <pre><span class="ruby-comment"># File parser.rb, line 158</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">max_depth</span> <span class="ruby-identifier">depth</span>=<span class="ruby-value">0</span>
+    <span class="ruby-ivar">@max_depth</span> = <span class="ruby-identifier">depth</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- max_depth-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- max_depth-method -->
+
+    
+      <div id="method-i-param" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">param</span><span
+            class="method-args">(param_name, &param_value_block)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Public Method</p>
+
+<p>Params:</p>
+
+<pre>param_name: A String with the parameter name for the POST
+
+param_value_block: A Block containing the value for the given parameter</pre>
+
+<p>Actions:</p>
+
+<pre>Sets the value for the given parameter for the post action, must be inside
+the post statement</pre>
+          
+
+          
+          <div class="method-source-code" id="param-source">
+            <pre><span class="ruby-comment"># File parser.rb, line 337</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">param</span> <span class="ruby-identifier">param_name</span>, &amp;<span class="ruby-identifier">param_value_block</span>
+
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- param-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- param-method -->
+
+    
+      <div id="method-i-password" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">password</span><span
+            class="method-args">(pass, default_field_name="pass")</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Public Method</p>
+
+<p>Params:</p>
+
+<pre>pass: Your Password
+
+default_field_name: The password field of the login URL,
+if defaults with &quot;pass&quot;</pre>
+
+<p>Actions:</p>
+
+<pre>Sets the password for the login data, must be inside the login statement</pre>
+          
+
+          
+          <div class="method-source-code" id="password-source">
+            <pre><span class="ruby-comment"># File parser.rb, line 284</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">password</span> <span class="ruby-identifier">pass</span>, <span class="ruby-identifier">default_field_name</span>=<span class="ruby-string">&quot;pass&quot;</span>
+    <span class="ruby-ivar">@login_hash</span>[<span class="ruby-identifier">default_field_name</span>] = <span class="ruby-identifier">pass</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- password-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- password-method -->
+
+    
+      <div id="method-i-post" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">post</span><span
+            class="method-args">(an_url, &post_block)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Public Method</p>
+
+<p>Params:</p>
+
+<pre>an_url: An URL on which the crawler will have to do POST requests
+
+post_block: A Block with the data for the given URL</pre>
+
+<p>Example:</p>
+
+<pre>crawl &quot;somewhere&quot; do
+    post &quot;an_url_to_post&quot; do
+        param &quot;param_name&quot; do
+            &quot;param_value&quot;
+        end
+        #...
+    end
+    #...
+end</pre>
+
+<p>Action:</p>
+
+<pre>Sets the URLs with it's data to use when requesting the URLs, must be
+inside the crawl statement</pre>
+          
+
+          
+          <div class="method-source-code" id="post-source">
+            <pre><span class="ruby-comment"># File parser.rb, line 323</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">post</span> <span class="ruby-identifier">an_url</span>, &amp;<span class="ruby-identifier">post_block</span>
+    <span class="ruby-ivar">@post_hash</span>[<span class="ruby-identifier">an_url</span>] = <span class="ruby-identifier">post_block</span>.<span class="ruby-identifier">call</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- post-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- post-method -->
+
+    
+      <div id="method-i-requests_delay" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">requests_delay</span><span
+            class="method-args">(miliseconds=100)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Public Method</p>
+
+<p>Params:</p>
+
+<pre>miliseconds: The average time between requests when crawling the web</pre>
+
+<p>Action:</p>
+
+<pre>Sets the average time between requests of the crawler, must be inside the
+crawl statement</pre>
+          
+
+          
+          <div class="method-source-code" id="requests_delay-source">
+            <pre><span class="ruby-comment"># File parser.rb, line 182</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">requests_delay</span> <span class="ruby-identifier">miliseconds</span>=<span class="ruby-value">100</span>
+    <span class="ruby-ivar">@requests_delay</span> = <span class="ruby-identifier">miliseconds</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- requests_delay-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- requests_delay-method -->
+
+    
+      <div id="method-i-requests_deviation" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">requests_deviation</span><span
+            class="method-args">(miliseconds=300)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Public Method</p>
+
+<p>Params:</p>
+
+<pre>miliseconds: TODO</pre>
+
+<p>Action:</p>
+
+<pre>TODO</pre>
+          
+
+          
+          <div class="method-source-code" id="requests_deviation-source">
+            <pre><span class="ruby-comment"># File parser.rb, line 193</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">requests_deviation</span> <span class="ruby-identifier">miliseconds</span>=<span class="ruby-value">300</span>
+    <span class="ruby-ivar">@requests_deviation</span> = <span class="ruby-identifier">miliseconds</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- requests_deviation-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- requests_deviation-method -->
+
+    
+      <div id="method-i-search_all_urls" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">search_all_urls</span><span
+            class="method-args">(a_boolean=true)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Public Method</p>
+
+<p>Params:</p>
+
+<pre>a_boolean: A Boolean value, if true, the crawler doesn't take account of
+allowed_urls nor black_list</pre>
+
+<p>Actions:</p>
+
+<pre>Sets the crawler to use or not the black_list and allowed_urls</pre>
+          
+
+          
+          <div class="method-source-code" id="search_all_urls-source">
+            <pre><span class="ruby-comment"># File parser.rb, line 229</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">search_all_urls</span> <span class="ruby-identifier">a_boolean</span>=<span class="ruby-keyword">true</span>
+    <span class="ruby-ivar">@search_all_urls</span> = <span class="ruby-identifier">a_boolean</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- search_all_urls-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- search_all_urls-method -->
+
+    
+      <div id="method-i-table" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">table</span><span
+            class="method-args">(table_name, &fields_block)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Public Method</p>
+
+<p>Params:</p>
+
+<pre>table_name: A String with the table name for the DataBase
+
+fields_block: A Block containing the table fields data</pre>
+
+<p>Example:</p>
+
+<pre>crawl &quot;somewhere&quot; do
+    table &quot;my_table&quot; do
+        field &quot;my_field&quot; do
+            &quot;some/valid/xpath&quot;
+        end
+        #...
+    end
+    #...
+end</pre>
+
+<p>Action:</p>
+
+<pre>Sets the necessary information for the framework to create the tables
+needed for the DataBase generation, must be inside a crawl statement</pre>
+          
+
+          
+          <div class="method-source-code" id="table-source">
+            <pre><span class="ruby-comment"># File parser.rb, line 362</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">table</span> <span class="ruby-identifier">table_name</span>, &amp;<span class="ruby-identifier">fields_block</span>
+    <span class="ruby-ivar">@selectors_hash</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-identifier">fields_block</span>.<span class="ruby-identifier">call</span>
+    <span class="ruby-ivar">@scrapers_hash</span>[<span class="ruby-identifier">table_name</span>] = <span class="ruby-constant">Scraper</span>.<span class="ruby-identifier">new</span> <span class="ruby-ivar">@selectors_hash</span>, <span class="ruby-constant">Table</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">table_name</span>, <span class="ruby-ivar">@selectors_hash</span>) 
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- table-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- table-method -->
+
+    
+      <div id="method-i-username" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">username</span><span
+            class="method-args">(user_name, default_field_name="user")</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Public Method</p>
+
+<p>Params:</p>
+
+<pre>user_name: Your Username
+
+default_field_name: The username field of the login URL, 
+it defaults with &quot;user&quot;</pre>
+
+<p>Actions:</p>
+
+<pre>Sets the username for the Login data, must be inside the login statement</pre>
+          
+
+          
+          <div class="method-source-code" id="username-source">
+            <pre><span class="ruby-comment"># File parser.rb, line 270</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">username</span> <span class="ruby-identifier">user_name</span>, <span class="ruby-identifier">default_field_name</span>=<span class="ruby-string">&quot;user&quot;</span>
+    <span class="ruby-ivar">@login_hash</span>[<span class="ruby-identifier">default_field_name</span>] = <span class="ruby-identifier">user_name</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- username-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- username-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.11.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+
