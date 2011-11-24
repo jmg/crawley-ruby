@@ -177,15 +177,15 @@
           <div class="method-source-code" id="_add_crawlers-source">
             <pre><span class="ruby-comment"># File parser.rb, line 139</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">_add_crawlers</span> <span class="ruby-identifier">urls</span>, <span class="ruby-identifier">max_depth</span>,
-                  <span class="ruby-identifier">allowed_urls</span>, <span class="ruby-identifier">black_list</span>, 
-                  <span class="ruby-identifier">max_concurrency_level</span>, <span class="ruby-identifier">requests_delay</span>,
-                  <span class="ruby-identifier">requests_deviation</span>, <span class="ruby-identifier">search_all_urls</span>,
-                  <span class="ruby-identifier">login</span>, <span class="ruby-identifier">post</span>
-    <span class="ruby-ivar">@crawlers</span>.<span class="ruby-identifier">push</span> <span class="ruby-constant">Crawler</span>.<span class="ruby-identifier">new</span> <span class="ruby-ivar">@scrapers_hash</span>.<span class="ruby-identifier">values</span>, <span class="ruby-identifier">urls</span>, 
-                               <span class="ruby-identifier">max_depth</span>, <span class="ruby-identifier">allowed_urls</span>,
-                               <span class="ruby-identifier">black_list</span>, <span class="ruby-identifier">max_concurrency_level</span>,
-                               <span class="ruby-identifier">requests_delay</span>, <span class="ruby-identifier">requests_deviation</span>,
-                               <span class="ruby-identifier">search_all_urls</span>, <span class="ruby-identifier">login</span>, <span class="ruby-identifier">post</span>
+  <span class="ruby-identifier">allowed_urls</span>, <span class="ruby-identifier">black_list</span>, 
+  <span class="ruby-identifier">max_concurrency_level</span>, <span class="ruby-identifier">requests_delay</span>,
+  <span class="ruby-identifier">requests_deviation</span>, <span class="ruby-identifier">search_all_urls</span>,
+  <span class="ruby-identifier">login</span>, <span class="ruby-identifier">post</span>
+  <span class="ruby-ivar">@crawlers</span>.<span class="ruby-identifier">push</span> <span class="ruby-constant">Crawler</span>.<span class="ruby-identifier">new</span> <span class="ruby-ivar">@scrapers_hash</span>.<span class="ruby-identifier">values</span>, <span class="ruby-identifier">urls</span>, 
+    <span class="ruby-identifier">max_depth</span>, <span class="ruby-identifier">allowed_urls</span>,
+    <span class="ruby-identifier">black_list</span>, <span class="ruby-identifier">max_concurrency_level</span>,
+    <span class="ruby-identifier">requests_delay</span>, <span class="ruby-identifier">requests_deviation</span>,
+    <span class="ruby-identifier">search_all_urls</span>, <span class="ruby-identifier">login</span>, <span class="ruby-identifier">post</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- _add_crawlers-source -->
           
@@ -224,7 +224,7 @@ any URL</pre>
           <div class="method-source-code" id="allowed_urls-source">
             <pre><span class="ruby-comment"># File parser.rb, line 205</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">allowed_urls</span> <span class="ruby-identifier">url_list</span>=[]
-    <span class="ruby-ivar">@allowed_urls</span> = <span class="ruby-identifier">url_list</span>
+  <span class="ruby-ivar">@allowed_urls</span> = <span class="ruby-identifier">url_list</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- allowed_urls-source -->
           
@@ -263,7 +263,7 @@ none</pre>
           <div class="method-source-code" id="black_list-source">
             <pre><span class="ruby-comment"># File parser.rb, line 217</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">black_list</span> <span class="ruby-identifier">url_list</span>=[]
-    <span class="ruby-ivar">@black_list</span> = <span class="ruby-identifier">url_list</span>
+  <span class="ruby-ivar">@black_list</span> = <span class="ruby-identifier">url_list</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- black_list-source -->
           
@@ -300,13 +300,13 @@ table_block:    A Block containing the rest of the DSL</pre>
 <p>Example:</p>
 
 <pre>crawl &quot;http://www.google.com&quot; do
-    table &quot;GOOGLE_DATA&quot; do
-        field &quot;urls&quot; do
-            &quot;a/valid/xpath/to/some/google/url&quot;
-        end
-        #...
+  table &quot;GOOGLE_DATA&quot; do
+    field &quot;urls&quot; do
+      &quot;a/valid/xpath/to/some/google/url&quot;
     end
     #...
+  end
+  #...
 end</pre>
 
 <p>Action:</p>
@@ -319,34 +319,34 @@ structure and launches the crawler</pre>
           <div class="method-source-code" id="crawl-source">
             <pre><span class="ruby-comment"># File parser.rb, line 104</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">crawl</span> <span class="ruby-identifier">urls</span>, &amp;<span class="ruby-identifier">table_block</span>
-    <span class="ruby-ivar">@crawlers</span> = []
-    <span class="ruby-ivar">@allowed_urls</span> = []
-    <span class="ruby-ivar">@black_list</span> = []
-    <span class="ruby-ivar">@max_depth</span> = <span class="ruby-value">0</span>
-    <span class="ruby-ivar">@max_concurrency_level</span> = <span class="ruby-value">25</span>
-    <span class="ruby-ivar">@requests_delay</span> = <span class="ruby-value">100</span>
-    <span class="ruby-ivar">@requests_deviation</span> = <span class="ruby-value">300</span>
-    <span class="ruby-ivar">@scrapers_hash</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
-    <span class="ruby-ivar">@post_hash</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
-    <span class="ruby-ivar">@search_all_urls</span> = <span class="ruby-keyword">true</span>
-    <span class="ruby-identifier">table_block</span>.<span class="ruby-identifier">call</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">urls</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-value">:each</span>
-        <span class="ruby-identifier">urls</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">an_url</span><span class="ruby-operator">|</span>
-            <span class="ruby-identifier">_add_crawlers</span> <span class="ruby-identifier">an_url</span>, <span class="ruby-ivar">@max_depth</span>, <span class="ruby-ivar">@allowed_urls</span>, 
-                                  <span class="ruby-ivar">@black_list</span>, <span class="ruby-ivar">@max_concurrency_level</span>,
-                                  <span class="ruby-ivar">@requests_delay</span>, <span class="ruby-ivar">@requests_deviation</span>,
-                                  <span class="ruby-ivar">@search_all_urls</span>, <span class="ruby-ivar">@login_hash</span>, <span class="ruby-ivar">@post_hash</span>
-        <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">else</span>
-        <span class="ruby-identifier">_add_crawlers</span> <span class="ruby-identifier">urls</span>, <span class="ruby-ivar">@max_depth</span>, <span class="ruby-ivar">@allowed_urls</span>, 
-                            <span class="ruby-ivar">@black_list</span>, <span class="ruby-ivar">@max_concurrency_level</span>,
-                            <span class="ruby-ivar">@requests_delay</span>, <span class="ruby-ivar">@requests_deviation</span>,
-                            <span class="ruby-ivar">@search_all_urls</span>, <span class="ruby-ivar">@login_hash</span>, <span class="ruby-ivar">@post_hash</span>
+  <span class="ruby-ivar">@crawlers</span> = []
+  <span class="ruby-ivar">@allowed_urls</span> = []
+  <span class="ruby-ivar">@black_list</span> = []
+  <span class="ruby-ivar">@max_depth</span> = <span class="ruby-value">0</span>
+  <span class="ruby-ivar">@max_concurrency_level</span> = <span class="ruby-value">25</span>
+  <span class="ruby-ivar">@requests_delay</span> = <span class="ruby-value">100</span>
+  <span class="ruby-ivar">@requests_deviation</span> = <span class="ruby-value">300</span>
+  <span class="ruby-ivar">@scrapers_hash</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@post_hash</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@search_all_urls</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-identifier">table_block</span>.<span class="ruby-identifier">call</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">urls</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-value">:each</span>
+    <span class="ruby-identifier">urls</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">an_url</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">_add_crawlers</span> <span class="ruby-identifier">an_url</span>, <span class="ruby-ivar">@max_depth</span>, <span class="ruby-ivar">@allowed_urls</span>, 
+        <span class="ruby-ivar">@black_list</span>, <span class="ruby-ivar">@max_concurrency_level</span>,
+        <span class="ruby-ivar">@requests_delay</span>, <span class="ruby-ivar">@requests_deviation</span>,
+        <span class="ruby-ivar">@search_all_urls</span>, <span class="ruby-ivar">@login_hash</span>, <span class="ruby-ivar">@post_hash</span>
     <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">_add_crawlers</span> <span class="ruby-identifier">urls</span>, <span class="ruby-ivar">@max_depth</span>, <span class="ruby-ivar">@allowed_urls</span>, 
+      <span class="ruby-ivar">@black_list</span>, <span class="ruby-ivar">@max_concurrency_level</span>,
+      <span class="ruby-ivar">@requests_delay</span>, <span class="ruby-ivar">@requests_deviation</span>,
+      <span class="ruby-ivar">@search_all_urls</span>, <span class="ruby-ivar">@login_hash</span>, <span class="ruby-ivar">@post_hash</span>
+  <span class="ruby-keyword">end</span>
 
-    <span class="ruby-ivar">@crawlers</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">crawler</span><span class="ruby-operator">|</span>
-        <span class="ruby-identifier">crawler</span>.<span class="ruby-identifier">run</span>
-    <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@crawlers</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">crawler</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">crawler</span>.<span class="ruby-identifier">run</span>
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- crawl-source -->
           
@@ -387,7 +387,7 @@ a table statement</pre>
           <div class="method-source-code" id="field-source">
             <pre><span class="ruby-comment"># File parser.rb, line 378</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">field</span> <span class="ruby-identifier">field_name</span>, &amp;<span class="ruby-identifier">selector_block</span>
-    <span class="ruby-ivar">@selectors_hash</span>[<span class="ruby-identifier">field_name</span>] = <span class="ruby-identifier">selector_block</span>.<span class="ruby-identifier">call</span>
+  <span class="ruby-ivar">@selectors_hash</span>[<span class="ruby-identifier">field_name</span>] = <span class="ruby-identifier">selector_block</span>.<span class="ruby-identifier">call</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- field-source -->
           
@@ -422,12 +422,12 @@ login_block: A Block containing Login data</pre>
 <p>Example:</p>
 
 <pre>crawl &quot;somewhere&quot; do
-    login &quot;login_url&quot; do
-        username &quot;my_user&quot;
-        password &quot;my_password&quot;
-        #...
-    end
+  login &quot;login_url&quot; do
+    username &quot;my_user&quot;
+    password &quot;my_password&quot;
     #...
+  end
+  #...
 end</pre>
 
 <p>Action:</p>
@@ -439,10 +439,10 @@ end</pre>
           <div class="method-source-code" id="login-source">
             <pre><span class="ruby-comment"># File parser.rb, line 253</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">login</span> <span class="ruby-identifier">login_url</span>, &amp;<span class="ruby-identifier">login_block</span>
-    <span class="ruby-ivar">@login_hash</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
-    <span class="ruby-ivar">@login_data</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
-    <span class="ruby-identifier">login_block</span>.<span class="ruby-identifier">call</span>
-    <span class="ruby-ivar">@login_hash</span>[<span class="ruby-identifier">login_url</span>] = <span class="ruby-ivar">@login_data</span>
+  <span class="ruby-ivar">@login_hash</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@login_data</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-identifier">login_block</span>.<span class="ruby-identifier">call</span>
+  <span class="ruby-ivar">@login_hash</span>[<span class="ruby-identifier">login_url</span>] = <span class="ruby-ivar">@login_data</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- login-source -->
           
@@ -483,7 +483,7 @@ statement</pre>
           <div class="method-source-code" id="login_param-source">
             <pre><span class="ruby-comment"># File parser.rb, line 298</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">login_param</span> <span class="ruby-identifier">param_name</span>, &amp;<span class="ruby-identifier">param_value_block</span>
-    <span class="ruby-ivar">@login_data</span>[<span class="ruby-identifier">param_name</span>] = <span class="ruby-identifier">param_value_block</span>.<span class="ruby-identifier">call</span>
+  <span class="ruby-ivar">@login_data</span>[<span class="ruby-identifier">param_name</span>] = <span class="ruby-identifier">param_value_block</span>.<span class="ruby-identifier">call</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- login_param-source -->
           
@@ -522,7 +522,7 @@ the crawl statement</pre>
           <div class="method-source-code" id="max_concurrency_level-source">
             <pre><span class="ruby-comment"># File parser.rb, line 170</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">max_concurrency_level</span> <span class="ruby-identifier">level</span>=<span class="ruby-value">25</span>
-    <span class="ruby-ivar">@max_concurrency_level</span> = <span class="ruby-identifier">level</span>
+  <span class="ruby-ivar">@max_concurrency_level</span> = <span class="ruby-identifier">level</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- max_concurrency_level-source -->
           
@@ -560,7 +560,7 @@ the crawl statement</pre>
           <div class="method-source-code" id="max_depth-source">
             <pre><span class="ruby-comment"># File parser.rb, line 158</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">max_depth</span> <span class="ruby-identifier">depth</span>=<span class="ruby-value">0</span>
-    <span class="ruby-ivar">@max_depth</span> = <span class="ruby-identifier">depth</span>
+  <span class="ruby-ivar">@max_depth</span> = <span class="ruby-identifier">depth</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- max_depth-source -->
           
@@ -642,7 +642,7 @@ if defaults with &quot;pass&quot;</pre>
           <div class="method-source-code" id="password-source">
             <pre><span class="ruby-comment"># File parser.rb, line 284</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">password</span> <span class="ruby-identifier">pass</span>, <span class="ruby-identifier">default_field_name</span>=<span class="ruby-string">&quot;pass&quot;</span>
-    <span class="ruby-ivar">@login_hash</span>[<span class="ruby-identifier">default_field_name</span>] = <span class="ruby-identifier">pass</span>
+  <span class="ruby-ivar">@login_hash</span>[<span class="ruby-identifier">default_field_name</span>] = <span class="ruby-identifier">pass</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- password-source -->
           
@@ -676,13 +676,13 @@ post_block: A Block with the data for the given URL</pre>
 <p>Example:</p>
 
 <pre>crawl &quot;somewhere&quot; do
-    post &quot;an_url_to_post&quot; do
-        param &quot;param_name&quot; do
-            &quot;param_value&quot;
-        end
-        #...
+  post &quot;an_url_to_post&quot; do
+    param &quot;param_name&quot; do
+      &quot;param_value&quot;
     end
     #...
+  end
+  #...
 end</pre>
 
 <p>Action:</p>
@@ -695,7 +695,7 @@ inside the crawl statement</pre>
           <div class="method-source-code" id="post-source">
             <pre><span class="ruby-comment"># File parser.rb, line 323</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">post</span> <span class="ruby-identifier">an_url</span>, &amp;<span class="ruby-identifier">post_block</span>
-    <span class="ruby-ivar">@post_hash</span>[<span class="ruby-identifier">an_url</span>] = <span class="ruby-identifier">post_block</span>.<span class="ruby-identifier">call</span>
+  <span class="ruby-ivar">@post_hash</span>[<span class="ruby-identifier">an_url</span>] = <span class="ruby-identifier">post_block</span>.<span class="ruby-identifier">call</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- post-source -->
           
@@ -734,7 +734,7 @@ crawl statement</pre>
           <div class="method-source-code" id="requests_delay-source">
             <pre><span class="ruby-comment"># File parser.rb, line 182</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">requests_delay</span> <span class="ruby-identifier">miliseconds</span>=<span class="ruby-value">100</span>
-    <span class="ruby-ivar">@requests_delay</span> = <span class="ruby-identifier">miliseconds</span>
+  <span class="ruby-ivar">@requests_delay</span> = <span class="ruby-identifier">miliseconds</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- requests_delay-source -->
           
@@ -772,7 +772,7 @@ crawl statement</pre>
           <div class="method-source-code" id="requests_deviation-source">
             <pre><span class="ruby-comment"># File parser.rb, line 193</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">requests_deviation</span> <span class="ruby-identifier">miliseconds</span>=<span class="ruby-value">300</span>
-    <span class="ruby-ivar">@requests_deviation</span> = <span class="ruby-identifier">miliseconds</span>
+  <span class="ruby-ivar">@requests_deviation</span> = <span class="ruby-identifier">miliseconds</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- requests_deviation-source -->
           
@@ -811,7 +811,7 @@ allowed_urls nor black_list</pre>
           <div class="method-source-code" id="search_all_urls-source">
             <pre><span class="ruby-comment"># File parser.rb, line 229</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">search_all_urls</span> <span class="ruby-identifier">a_boolean</span>=<span class="ruby-keyword">true</span>
-    <span class="ruby-ivar">@search_all_urls</span> = <span class="ruby-identifier">a_boolean</span>
+  <span class="ruby-ivar">@search_all_urls</span> = <span class="ruby-identifier">a_boolean</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- search_all_urls-source -->
           
@@ -845,13 +845,13 @@ fields_block: A Block containing the table fields data</pre>
 <p>Example:</p>
 
 <pre>crawl &quot;somewhere&quot; do
-    table &quot;my_table&quot; do
-        field &quot;my_field&quot; do
-            &quot;some/valid/xpath&quot;
-        end
-        #...
+  table &quot;my_table&quot; do
+    field &quot;my_field&quot; do
+      &quot;some/valid/xpath&quot;
     end
     #...
+  end
+  #...
 end</pre>
 
 <p>Action:</p>
@@ -864,9 +864,9 @@ needed for the DataBase generation, must be inside a crawl statement</pre>
           <div class="method-source-code" id="table-source">
             <pre><span class="ruby-comment"># File parser.rb, line 362</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">table</span> <span class="ruby-identifier">table_name</span>, &amp;<span class="ruby-identifier">fields_block</span>
-    <span class="ruby-ivar">@selectors_hash</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
-    <span class="ruby-identifier">fields_block</span>.<span class="ruby-identifier">call</span>
-    <span class="ruby-ivar">@scrapers_hash</span>[<span class="ruby-identifier">table_name</span>] = <span class="ruby-constant">Scraper</span>.<span class="ruby-identifier">new</span> <span class="ruby-ivar">@selectors_hash</span>, <span class="ruby-constant">Table</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">table_name</span>, <span class="ruby-ivar">@selectors_hash</span>) 
+  <span class="ruby-ivar">@selectors_hash</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-identifier">fields_block</span>.<span class="ruby-identifier">call</span>
+  <span class="ruby-ivar">@scrapers_hash</span>[<span class="ruby-identifier">table_name</span>] = <span class="ruby-constant">Scraper</span>.<span class="ruby-identifier">new</span> <span class="ruby-ivar">@selectors_hash</span>, <span class="ruby-constant">Table</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">table_name</span>, <span class="ruby-ivar">@selectors_hash</span>) 
 <span class="ruby-keyword">end</span></pre>
           </div><!-- table-source -->
           
@@ -907,7 +907,7 @@ it defaults with &quot;user&quot;</pre>
           <div class="method-source-code" id="username-source">
             <pre><span class="ruby-comment"># File parser.rb, line 270</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">username</span> <span class="ruby-identifier">user_name</span>, <span class="ruby-identifier">default_field_name</span>=<span class="ruby-string">&quot;user&quot;</span>
-    <span class="ruby-ivar">@login_hash</span>[<span class="ruby-identifier">default_field_name</span>] = <span class="ruby-identifier">user_name</span>
+  <span class="ruby-ivar">@login_hash</span>[<span class="ruby-identifier">default_field_name</span>] = <span class="ruby-identifier">user_name</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- username-source -->
           

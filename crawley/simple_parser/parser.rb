@@ -89,13 +89,13 @@ end
 #
 # Example:
 #    crawl "http://www.google.com" do
-#        table "GOOGLE_DATA" do
-#            field "urls" do
-#                "a/valid/xpath/to/some/google/url"
-#            end
-#            #...
+#      table "GOOGLE_DATA" do
+#        field "urls" do
+#          "a/valid/xpath/to/some/google/url"
 #        end
 #        #...
+#      end
+#      #...
 #    end
 #
 # Action:
@@ -240,12 +240,12 @@ end
 #
 # Example:
 #   crawl "somewhere" do
-#       login "login_url" do
-#           username "my_user"
-#           password "my_password"
-#           #...
-#       end
+#     login "login_url" do
+#       username "my_user"
+#       password "my_password"
 #       #...
+#     end
+#     #...
 #   end
 #
 # Action:
@@ -308,13 +308,13 @@ end
 #
 # Example:
 #   crawl "somewhere" do
-#       post "an_url_to_post" do
-#           param "param_name" do
-#               "param_value"
-#           end
-#           #...
+#     post "an_url_to_post" do
+#       param "param_name" do
+#         "param_value"
 #       end
 #       #...
+#     end
+#     #...
 #   end
 #
 # Action:
@@ -347,13 +347,13 @@ end
 #
 # Example:
 #   crawl "somewhere" do
-#       table "my_table" do
-#           field "my_field" do
-#               "some/valid/xpath"
-#           end
-#           #...
+#     table "my_table" do
+#       field "my_field" do
+#         "some/valid/xpath"
 #       end
 #       #...
+#     end
+#     #...
 #   end
 #
 # Action:
@@ -411,7 +411,7 @@ if __FILE__ == $0
     end
 
     table "MI_TABLA" do             #Required
-      field "MI_CAMPO_0" do       #Required
+      field "MI_CAMPO_0" do         #Required
         "/html/body/div[5]/div/div/div[3]/ul/li/span"
       end
 

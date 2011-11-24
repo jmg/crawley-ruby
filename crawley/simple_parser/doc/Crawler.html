@@ -145,21 +145,21 @@
           <div class="method-source-code" id="new-source">
             <pre><span class="ruby-comment"># File parser.rb, line 46</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> <span class="ruby-identifier">scrapers</span>, <span class="ruby-identifier">urls</span>, <span class="ruby-identifier">max_depth</span>, 
-               <span class="ruby-identifier">allowed_urls</span>, <span class="ruby-identifier">black_list</span>, 
-               <span class="ruby-identifier">max_concurrency_level</span>, <span class="ruby-identifier">requests_delay</span>,
-               <span class="ruby-identifier">requests_deviation</span>, <span class="ruby-identifier">search_all_urls</span>,
-               <span class="ruby-identifier">login</span>, <span class="ruby-identifier">post</span>
-    <span class="ruby-ivar">@scrapers</span> = <span class="ruby-identifier">scrapers</span>
-    <span class="ruby-ivar">@urls</span> = <span class="ruby-identifier">urls</span>
-    <span class="ruby-ivar">@max_depth</span> = <span class="ruby-identifier">max_depth</span>
-    <span class="ruby-ivar">@allowed_urls</span> = <span class="ruby-identifier">allowed_urls</span>
-    <span class="ruby-ivar">@black_list</span> = <span class="ruby-identifier">black_list</span>
-    <span class="ruby-ivar">@max_concurrency_level</span> = <span class="ruby-identifier">max_concurrency_level</span>
-    <span class="ruby-ivar">@requests_delay</span> = <span class="ruby-identifier">requests_delay</span>
-    <span class="ruby-ivar">@requests_deviation</span> = <span class="ruby-identifier">requests_deviation</span>
-    <span class="ruby-ivar">@search_all_urls</span> = <span class="ruby-identifier">search_all_urls</span>
-    <span class="ruby-ivar">@login</span> = <span class="ruby-identifier">login</span>
-    <span class="ruby-ivar">@post</span> = <span class="ruby-identifier">post</span>
+  <span class="ruby-identifier">allowed_urls</span>, <span class="ruby-identifier">black_list</span>, 
+  <span class="ruby-identifier">max_concurrency_level</span>, <span class="ruby-identifier">requests_delay</span>,
+  <span class="ruby-identifier">requests_deviation</span>, <span class="ruby-identifier">search_all_urls</span>,
+  <span class="ruby-identifier">login</span>, <span class="ruby-identifier">post</span>
+  <span class="ruby-ivar">@scrapers</span> = <span class="ruby-identifier">scrapers</span>
+  <span class="ruby-ivar">@urls</span> = <span class="ruby-identifier">urls</span>
+  <span class="ruby-ivar">@max_depth</span> = <span class="ruby-identifier">max_depth</span>
+  <span class="ruby-ivar">@allowed_urls</span> = <span class="ruby-identifier">allowed_urls</span>
+  <span class="ruby-ivar">@black_list</span> = <span class="ruby-identifier">black_list</span>
+  <span class="ruby-ivar">@max_concurrency_level</span> = <span class="ruby-identifier">max_concurrency_level</span>
+  <span class="ruby-ivar">@requests_delay</span> = <span class="ruby-identifier">requests_delay</span>
+  <span class="ruby-ivar">@requests_deviation</span> = <span class="ruby-identifier">requests_deviation</span>
+  <span class="ruby-ivar">@search_all_urls</span> = <span class="ruby-identifier">search_all_urls</span>
+  <span class="ruby-ivar">@login</span> = <span class="ruby-identifier">login</span>
+  <span class="ruby-ivar">@post</span> = <span class="ruby-identifier">post</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- new-source -->
           
@@ -195,18 +195,18 @@
           <div class="method-source-code" id="run-source">
             <pre><span class="ruby-comment"># File parser.rb, line 64</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">run</span>
-    <span class="ruby-ivar">@scrapers</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">scraper</span><span class="ruby-operator">|</span>
-        <span class="ruby-identifier">scraper</span>.<span class="ruby-identifier">selectors</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">selector</span><span class="ruby-operator">|</span>
-            <span class="ruby-identifier">puts</span> <span class="ruby-identifier">selector</span>
-        <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@scrapers</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">scraper</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">scraper</span>.<span class="ruby-identifier">selectors</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">selector</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">puts</span> <span class="ruby-identifier">selector</span>
     <span class="ruby-keyword">end</span>
-    
-    <span class="ruby-identifier">puts</span> <span class="ruby-ivar">@max_depth</span>
+  <span class="ruby-keyword">end</span>
 
-    <span class="ruby-constant">DataMapper</span><span class="ruby-operator">::</span><span class="ruby-constant">Logger</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">$stdout</span>, <span class="ruby-value">:debug</span>)
-    <span class="ruby-constant">DataMapper</span>.<span class="ruby-identifier">setup</span>(<span class="ruby-value">:default</span>, <span class="ruby-string">'sqlite::memory:'</span>)
-    <span class="ruby-constant">DataMapper</span>.<span class="ruby-identifier">setup</span>(<span class="ruby-value">:default</span>, <span class="ruby-string">'sqlite:///'</span> <span class="ruby-operator">+</span> <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">pwd</span> <span class="ruby-operator">+</span> <span class="ruby-string">'/base.db'</span>)
-    <span class="ruby-constant">DataMapper</span>.<span class="ruby-identifier">auto_migrate!</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-ivar">@max_depth</span>
+
+  <span class="ruby-constant">DataMapper</span><span class="ruby-operator">::</span><span class="ruby-constant">Logger</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">$stdout</span>, <span class="ruby-value">:debug</span>)
+  <span class="ruby-constant">DataMapper</span>.<span class="ruby-identifier">setup</span>(<span class="ruby-value">:default</span>, <span class="ruby-string">'sqlite::memory:'</span>)
+  <span class="ruby-constant">DataMapper</span>.<span class="ruby-identifier">setup</span>(<span class="ruby-value">:default</span>, <span class="ruby-string">'sqlite:///'</span> <span class="ruby-operator">+</span> <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">pwd</span> <span class="ruby-operator">+</span> <span class="ruby-string">'/base.db'</span>)
+  <span class="ruby-constant">DataMapper</span>.<span class="ruby-identifier">auto_migrate!</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- run-source -->
           
