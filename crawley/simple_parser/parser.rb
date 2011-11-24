@@ -2,6 +2,8 @@ require 'rubygems'
 require 'data_mapper'
 require 'dm-migrations'
 
+require_relative '../crawlers.rb'
+
 @selectors_hash = Hash.new
 @scrapers_hash = Hash.new
 @post_hash = Hash.new
@@ -378,7 +380,6 @@ end
 def field field_name, &selector_block
   @selectors_hash[field_name] = selector_block.call
 end
-
 if __FILE__ == $0
   #Example implementation of the DSL using the full spectrum of the
   #possibilities

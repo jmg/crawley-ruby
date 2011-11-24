@@ -2,10 +2,10 @@ require 'net/http'
 require 'rubygems'
 require 'mechanize'
 
-require 'response'
-require 'scrapers'
+require_relative './response.rb'
+require_relative './scrapers.rb'
 
-module crawley
+module Crawley
 
     class BaseCrawler
         
