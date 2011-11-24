@@ -18,63 +18,63 @@ require 'dm-migrations'
 
 # Mock implementation of Table class
 class Table
-    include DataMapper::Resource 
+  include DataMapper::Resource 
 
-    property :id, Serial
+  property :id, Serial
 
-    def initialize name, selectors
-        @name = name
-        Table.storage_names[:default] = @name
-        selectors.keys.each do |key|
-            Table.property key, key.class 
-        end
+  def initialize name, selectors
+    @name = name
+    Table.storage_names[:default] = @name
+    selectors.keys.each do |key|
+      Table.property key, key.class 
     end
+  end
 end
 
 # Mock implementation of Scraper class
 class Scraper
-    attr_accessor :selectors
+  attr_accessor :selectors
 
-    def initialize selectors, table
-        @selectors = selectors.values
-        @table = table
-    end
+  def initialize selectors, table
+    @selectors = selectors.values
+    @table = table
+  end
 end
 
 # Mock implementation of Crawler class
 class Crawler
-    def initialize scrapers, urls, max_depth, 
-                   allowed_urls, black_list, 
-                   max_concurrency_level, requests_delay,
-                   requests_deviation, search_all_urls,
-                   login, post
-        @scrapers = scrapers
-        @urls = urls
-        @max_depth = max_depth
-        @allowed_urls = allowed_urls
-        @black_list = black_list
-        @max_concurrency_level = max_concurrency_level
-        @requests_delay = requests_delay
-        @requests_deviation = requests_deviation
-        @search_all_urls = search_all_urls
-        @login = login
-        @post = post
+  def initialize scrapers, urls, max_depth, 
+    allowed_urls, black_list, 
+    max_concurrency_level, requests_delay,
+    requests_deviation, search_all_urls,
+    login, post
+    @scrapers = scrapers
+    @urls = urls
+    @max_depth = max_depth
+    @allowed_urls = allowed_urls
+    @black_list = black_list
+    @max_concurrency_level = max_concurrency_level
+    @requests_delay = requests_delay
+    @requests_deviation = requests_deviation
+    @search_all_urls = search_all_urls
+    @login = login
+    @post = post
+  end
+
+  def run
+    @scrapers.each do |scraper|
+      scraper.selectors.each do |selector|
+        puts selector
+      end
     end
 
-    def run
-        @scrapers.each do |scraper|
-            scraper.selectors.each do |selector|
-                puts selector
-            end
-        end
-        
-        puts @max_depth
+    puts @max_depth
 
-        DataMapper::Logger.new($stdout, :debug)
-        DataMapper.setup(:default, 'sqlite::memory:')
-        DataMapper.setup(:default, 'sqlite:///' + Dir.pwd + '/base.db')
-        DataMapper.auto_migrate!
-    end
+    DataMapper::Logger.new($stdout, :debug)
+    DataMapper.setup(:default, 'sqlite::memory:')
+    DataMapper.setup(:default, 'sqlite:///' + Dir.pwd + '/base.db')
+    DataMapper.auto_migrate!
+  end
 end
 
 
@@ -102,34 +102,34 @@ end
 #    Creates the DataBase, Scrapers and Crawlers for the requested data
 #    structure and launches the crawler
 def crawl urls, &table_block
-    @crawlers = []
-    @allowed_urls = []
-    @black_list = []
-    @max_depth = 0
-    @max_concurrency_level = 25
-    @requests_delay = 100
-    @requests_deviation = 300
-    @scrapers_hash = Hash.new
-    @post_hash = Hash.new
-    @search_all_urls = true
-    table_block.call
-    if urls.respond_to? :each
-        urls.each do |an_url|
-            _add_crawlers an_url, @max_depth, @allowed_urls, 
-                                  @black_list, @max_concurrency_level,
-                                  @requests_delay, @requests_deviation,
-                                  @search_all_urls, @login_hash, @post_hash
-        end
-    else
-        _add_crawlers urls, @max_depth, @allowed_urls, 
-                            @black_list, @max_concurrency_level,
-                            @requests_delay, @requests_deviation,
-                            @search_all_urls, @login_hash, @post_hash
+  @crawlers = []
+  @allowed_urls = []
+  @black_list = []
+  @max_depth = 0
+  @max_concurrency_level = 25
+  @requests_delay = 100
+  @requests_deviation = 300
+  @scrapers_hash = Hash.new
+  @post_hash = Hash.new
+  @search_all_urls = true
+  table_block.call
+  if urls.respond_to? :each
+    urls.each do |an_url|
+      _add_crawlers an_url, @max_depth, @allowed_urls, 
+        @black_list, @max_concurrency_level,
+        @requests_delay, @requests_deviation,
+        @search_all_urls, @login_hash, @post_hash
     end
+  else
+    _add_crawlers urls, @max_depth, @allowed_urls, 
+      @black_list, @max_concurrency_level,
+      @requests_delay, @requests_deviation,
+      @search_all_urls, @login_hash, @post_hash
+  end
 
-    @crawlers.each do |crawler|
-        crawler.run
-    end
+  @crawlers.each do |crawler|
+    crawler.run
+  end
 end
 
 # Private Method
@@ -137,15 +137,15 @@ end
 # Action:
 #   Creates and adds the crawler to the crawlers list
 def _add_crawlers urls, max_depth,
-                  allowed_urls, black_list, 
-                  max_concurrency_level, requests_delay,
-                  requests_deviation, search_all_urls,
-                  login, post
-    @crawlers.push Crawler.new @scrapers_hash.values, urls, 
-                               max_depth, allowed_urls,
-                               black_list, max_concurrency_level,
-                               requests_delay, requests_deviation,
-                               search_all_urls, login, post
+  allowed_urls, black_list, 
+  max_concurrency_level, requests_delay,
+  requests_deviation, search_all_urls,
+  login, post
+  @crawlers.push Crawler.new @scrapers_hash.values, urls, 
+    max_depth, allowed_urls,
+    black_list, max_concurrency_level,
+    requests_delay, requests_deviation,
+    search_all_urls, login, post
 end
 
 # Public Method
@@ -156,7 +156,7 @@ end
 # Action:
 #   Sets the maximum depth of the crawler, must be inside the crawl statement
 def max_depth depth=0
-    @max_depth = depth
+  @max_depth = depth
 end
 
 # Public Method
@@ -168,7 +168,7 @@ end
 #   Sets the maximum concurrency level of the crawler threads, must be inside
 #   the crawl statement
 def max_concurrency_level level=25
-    @max_concurrency_level = level
+  @max_concurrency_level = level
 end
 
 # Public Method
@@ -180,7 +180,7 @@ end
 #   Sets the average time between requests of the crawler, must be inside the
 #   crawl statement
 def requests_delay miliseconds=100
-    @requests_delay = miliseconds
+  @requests_delay = miliseconds
 end
 
 # Public Method
@@ -191,7 +191,7 @@ end
 # Action:
 #   TODO
 def requests_deviation miliseconds=300
-    @requests_deviation = miliseconds
+  @requests_deviation = miliseconds
 end
 
 # Public Method
@@ -203,7 +203,7 @@ end
 # Actions:
 #   Sets the URL whitelist
 def allowed_urls url_list=[]
-    @allowed_urls = url_list
+  @allowed_urls = url_list
 end
 
 # Public Method
@@ -215,7 +215,7 @@ end
 # Actions:
 #   Sets the URL blacklist
 def black_list url_list=[]
-    @black_list = url_list
+  @black_list = url_list
 end
 
 # Public Method
@@ -227,7 +227,7 @@ end
 # Actions:
 #   Sets the crawler to use or not the black_list and allowed_urls
 def search_all_urls a_boolean=true
-    @search_all_urls = a_boolean
+  @search_all_urls = a_boolean
 end
 
 # Public Method
@@ -251,10 +251,10 @@ end
 # Action:
 #   Sets the login data for the crawler, must be inside the crawl statement
 def login login_url, &login_block
-    @login_hash = Hash.new
-    @login_data = Hash.new
-    login_block.call
-    @login_hash[login_url] = @login_data
+  @login_hash = Hash.new
+  @login_data = Hash.new
+  login_block.call
+  @login_hash[login_url] = @login_data
 end
 
 # Public Method
@@ -268,7 +268,7 @@ end
 # Actions:
 #   Sets the username for the Login data, must be inside the login statement
 def username user_name, default_field_name="user"
-    @login_hash[default_field_name] = user_name
+  @login_hash[default_field_name] = user_name
 end
 
 # Public Method
@@ -282,7 +282,7 @@ end
 # Actions:
 #   Sets the password for the login data, must be inside the login statement
 def password pass, default_field_name="pass"
-    @login_hash[default_field_name] = pass
+  @login_hash[default_field_name] = pass
 end
 
 # Public Method
@@ -296,7 +296,7 @@ end
 #   Sets any additional parameter for the login data, must be inside the login
 #   statement
 def login_param param_name, &param_value_block
-    @login_data[param_name] = param_value_block.call
+  @login_data[param_name] = param_value_block.call
 end
 
 # Public Method
@@ -321,7 +321,7 @@ end
 #   Sets the URLs with it's data to use when requesting the URLs, must be
 #   inside the crawl statement
 def post an_url, &post_block
-    @post_hash[an_url] = post_block.call
+  @post_hash[an_url] = post_block.call
 end
 
 # Public Method
@@ -360,9 +360,9 @@ end
 #   Sets the necessary information for the framework to create the tables
 #   needed for the DataBase generation, must be inside a crawl statement
 def table table_name, &fields_block
-    @selectors_hash = Hash.new
-    fields_block.call
-    @scrapers_hash[table_name] = Scraper.new @selectors_hash, Table.new(table_name, @selectors_hash) 
+  @selectors_hash = Hash.new
+  fields_block.call
+  @scrapers_hash[table_name] = Scraper.new @selectors_hash, Table.new(table_name, @selectors_hash) 
 end
 
 # Public Method
@@ -376,52 +376,52 @@ end
 #   Sets the fields data for generating the tables and scrapers, must be inside
 #   a table statement
 def field field_name, &selector_block
-    @selectors_hash[field_name] = selector_block.call
+  @selectors_hash[field_name] = selector_block.call
 end
 
 if __FILE__ == $0
-    #Example implementation of the DSL using the full spectrum of the
-    #possibilities
-    crawl "http://pypi.python.org/pypi/cilantro/0.9b4" do #Required
-        max_depth 2                     #Optional: defaults in 0
-        allowed_urls []                 #Optional: defaults in []
-        black_list []                   #Optional: defaults in []
-        max_concurrency_level 1000      #Optional: defaults in 25
-        requests_delay 1000             #Optional: defaults in 100
-        requests_deviation 1000         #Optional: defaults in 300
-        search_all_urls                 #Optional: defaults in true, 
-                                        #to make it false just call it
-                                        #search_all_urls false   
+  #Example implementation of the DSL using the full spectrum of the
+  #possibilities
+  crawl "http://pypi.python.org/pypi/cilantro/0.9b4" do #Required
+    max_depth 2                     #Optional: defaults in 0
+    allowed_urls []                 #Optional: defaults in []
+    black_list []                   #Optional: defaults in []
+    max_concurrency_level 1000      #Optional: defaults in 25
+    requests_delay 1000             #Optional: defaults in 100
+    requests_deviation 1000         #Optional: defaults in 300
+    search_all_urls                 #Optional: defaults in true, 
+    #to make it false just call it
+    #search_all_urls false   
 
-        login "login_url" do            #Optional: defaults in {}
-           username "username"
-           password "password"
-           login_param "param_name" do
-               "value"
-           end
-        #  ...
-        end
-
-        post "an_url" do                #Optional: defaults in {}
-            {'param_1' => 'value_1', 'param_2' => 'value_2'}
-        end
-
-        post "another_url" do
-            {'param_3' => 'value_3'}
-        end
-
-        table "MI_TABLA" do             #Required
-            field "MI_CAMPO_0" do       #Required
-                "/html/body/div[5]/div/div/div[3]/ul/li/span"
-            end
-
-            field "MI_CAMPO_1" do
-                "/html/body/div[5]/div/div/div[3]/ul/li[3]/span"
-            end
-
-            field "MI_CAMPO_2" do
-                "/html/body/div[5]/div/div/div[3]/ul/li[4]/span"
-            end
-        end
+    login "login_url" do            #Optional: defaults in {}
+      username "username"
+      password "password"
+      login_param "param_name" do
+        "value"
+      end
+      #  ...
     end
+
+    post "an_url" do                #Optional: defaults in {}
+      {'param_1' => 'value_1', 'param_2' => 'value_2'}
+    end
+
+    post "another_url" do
+      {'param_3' => 'value_3'}
+    end
+
+    table "MI_TABLA" do             #Required
+      field "MI_CAMPO_0" do       #Required
+        "/html/body/div[5]/div/div/div[3]/ul/li/span"
+      end
+
+      field "MI_CAMPO_1" do
+        "/html/body/div[5]/div/div/div[3]/ul/li[3]/span"
+      end
+
+      field "MI_CAMPO_2" do
+        "/html/body/div[5]/div/div/div[3]/ul/li[4]/span"
+      end
+    end
+  end
 end
