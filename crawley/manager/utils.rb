@@ -1,4 +1,4 @@
-module crawley
+module Crawley
 
     class CustomHash
 

@@ -1,6 +1,6 @@
-require 'crawley/manager/commands/base'
+require_relative 'base'
 
-module crawley
+module Crawley
 
     class SyncdbCommand < Command
         

@@ -1,9 +1,9 @@
 require 'optparse'
-require 'crawley/manager/commands/commands'
+require_relative 'commands/commands'
 
 options = {}
 
-module crawley
+module Crawley
 
     def manage
         cmd = Commands.get ARGV[0]

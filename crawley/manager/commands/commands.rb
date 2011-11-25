@@ -1,8 +1,8 @@
-require 'crawley/manager/commands/run'
-require 'crawley/manager/commands/syncdb'
-require 'crawley/manager/utils'
+require_relative 'run'
+require_relative 'syncdb'
+require_relative '../utils'
 
-module crawley
+module Crawley
 
     hash = { RunCommand::name => RunCommand,
              SyncdbCommand::name => SyncdbCommand }
