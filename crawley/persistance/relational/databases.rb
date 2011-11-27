@@ -1,3 +1,5 @@
+require 'data_mapper'
+
 module Persistance
 
     class Entity

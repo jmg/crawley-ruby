@@ -1,7 +1,7 @@
-require_relative '../persistance/realtional/databases.rb'
+require_relative '../persistance/relational/databases.rb'
 
 module Crawley
-  class DSLTable < Entity
+  class DSLTable < Persistance::Entity
 
     def initialize name, selectors
       @name = name

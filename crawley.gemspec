@@ -16,6 +16,7 @@ Gem::Specification.new do |s|
   s.version           = '0.0.1'
   s.date              = '2011-11-27'
   s.rubyforge_project = 'crawley'
+  s.require_paths = ["crawley"]
 
   ## Make sure your summary is short. The description may be as long
   ## as you like.
@@ -58,9 +59,9 @@ Gem::Specification.new do |s|
     crawley/manager/commands/syncdb.rb
     crawley/manager/manager.rb
     crawley/manager/utils.rb
+    crawley/persistance/relational/databases.rb
     crawley/response.rb
     crawley/scrapers.rb
-    crawley/scraping_table.rb
     crawley/simple_parser/doc/Crawler.html
     crawley/simple_parser/doc/Object.html
     crawley/simple_parser/doc/Scraper.html
@@ -100,6 +101,7 @@ Gem::Specification.new do |s|
     crawley/simple_parser/doc/rdoc.css
     crawley/simple_parser/doc/table_of_contents.html
     crawley/simple_parser/parser.rb
+    crawley/simple_parser/scraping_table.rb
     examples/pypi_crawler/crawlers.rb
     examples/pypi_crawler/models.rb
     tests/crawler_test.rb
