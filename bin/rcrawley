@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 
 require_relative '../crawley/manager/manager'
-Crawley::manage
+manage

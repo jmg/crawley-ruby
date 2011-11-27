@@ -102,6 +102,7 @@ Gem::Specification.new do |s|
     crawley/simple_parser/doc/table_of_contents.html
     crawley/simple_parser/parser.rb
     crawley/simple_parser/scraping_table.rb
+    examples/dsl_example/dsl_example.rb
     examples/pypi_crawler/crawlers.rb
     examples/pypi_crawler/models.rb
     tests/crawler_test.rb
