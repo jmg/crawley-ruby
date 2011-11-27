@@ -16,3 +16,9 @@
 #    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 VERSION = "0.0.1"
+
+require 'rubygems'
+require_relative 'crawlers.rb'
+require_relative 'scrapers.rb'
+require_relative 'response.rb'
+require_relative 'simple_parser/parser.rb'

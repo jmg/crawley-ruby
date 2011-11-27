@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   ## the sub! line in the Rakefile
   s.name              = 'crawley'
   s.version           = '0.0.1'
-  s.date              = '2011-11-26'
+  s.date              = '2011-11-27'
   s.rubyforge_project = 'crawley'
 
   ## Make sure your summary is short. The description may be as long
@@ -60,6 +60,7 @@ Gem::Specification.new do |s|
     crawley/manager/utils.rb
     crawley/response.rb
     crawley/scrapers.rb
+    crawley/scraping_table.rb
     crawley/simple_parser/doc/Crawler.html
     crawley/simple_parser/doc/Object.html
     crawley/simple_parser/doc/Scraper.html

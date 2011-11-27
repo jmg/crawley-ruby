@@ -1,10 +1,8 @@
 require 'rubygems'
-require 'data_mapper'
-require 'dm-migrations'
 
 require_relative '../crawlers.rb'
 require_relative '../scrapers.rb'
-require_relative '../scraping_table.rb'
+require_relative 'scraping_table.rb'
 
 @selectors_hash = Hash.new
 @scrapers_hash = Hash.new
