@@ -1,8 +1,7 @@
-module Crawley
-  class Table
-    include DataMapper::Resource 
+require_relative 'entity.rb'
 
-    property :id, Serial
+module Crawley
+  class DSLTable < Entity
 
     def initialize name, selectors
       @name = name

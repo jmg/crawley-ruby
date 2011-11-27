@@ -377,7 +377,7 @@ def table table_name, &fields_block
   scraper = Crawley::BaseScraper.new
   scraper.instance_variable_set :@selectors, @selectors_hash
   scraper.instance_variable_set :@tables, 
-    (scraper.instance_variable_get :@tables).push(Crawley::Table.new table_name, @selectors_hash)
+    (scraper.instance_variable_get :@tables).push(Crawley::DSLTable.new table_name, @selectors_hash)
   @scrapers_hash[table_name] = scraper 
 end
 
