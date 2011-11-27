@@ -15,4 +15,4 @@
 #    along with crawley-ruby; if not, write to the Free Software
 #    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-version = "0.0.1"
+VERSION = "0.0.1"

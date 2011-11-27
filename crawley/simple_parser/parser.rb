@@ -3,6 +3,8 @@ require 'data_mapper'
 require 'dm-migrations'
 
 require_relative '../crawlers.rb'
+require_relative '../scrapers.rb'
+require_relative '../scraping_table.rb'
 
 @selectors_hash = Hash.new
 @scrapers_hash = Hash.new
@@ -12,73 +14,16 @@ require_relative '../crawlers.rb'
 @crawlers = []
 @allowed_urls = []
 @black_list = []
+@proxy_host = ""
+@proxy_username = ""
+@proxy_password = ""
+@proxy_port = 80
 @max_depth = 0
 @max_concurrency_level = 25
 @requests_delay = 100
 @requests_deviation = 300
 @search_all_urls = true
-
-# Mock implementation of Table class
-class Table
-  include DataMapper::Resource 
-
-  property :id, Serial
-
-  def initialize name, selectors
-    @name = name
-    Table.storage_names[:default] = @name
-    selectors.keys.each do |key|
-      Table.property key, key.class 
-    end
-  end
-end
-
-# Mock implementation of Scraper class
-class Scraper
-  attr_accessor :selectors
-
-  def initialize selectors, table
-    @selectors = selectors.values
-    @table = table
-  end
-end
-
-# Mock implementation of Crawler class
-class Crawler
-  def initialize scrapers, urls, max_depth, 
-    allowed_urls, black_list, 
-    max_concurrency_level, requests_delay,
-    requests_deviation, search_all_urls,
-    login, post
-    @scrapers = scrapers
-    @urls = urls
-    @max_depth = max_depth
-    @allowed_urls = allowed_urls
-    @black_list = black_list
-    @max_concurrency_level = max_concurrency_level
-    @requests_delay = requests_delay
-    @requests_deviation = requests_deviation
-    @search_all_urls = search_all_urls
-    @login = login
-    @post = post
-  end
-
-  def run
-    @scrapers.each do |scraper|
-      scraper.selectors.each do |selector|
-        puts selector
-      end
-    end
-
-    puts @max_depth
-
-    DataMapper::Logger.new($stdout, :debug)
-    DataMapper.setup(:default, 'sqlite::memory:')
-    DataMapper.setup(:default, 'sqlite:///' + Dir.pwd + '/base.db')
-    DataMapper.auto_migrate!
-  end
-end
-
+@debug = false
 
 # Public Method
 #
@@ -107,6 +52,10 @@ def crawl urls, &table_block
   @crawlers = []
   @allowed_urls = []
   @black_list = []
+  @proxy_host = ""
+  @proxy_user = ""
+  @proxy_pass = ""
+  @proxy_port = 80
   @max_depth = 0
   @max_concurrency_level = 25
   @requests_delay = 100
@@ -114,23 +63,18 @@ def crawl urls, &table_block
   @scrapers_hash = Hash.new
   @post_hash = Hash.new
   @search_all_urls = true
+  @debug = false
   table_block.call
   if urls.respond_to? :each
     urls.each do |an_url|
-      _add_crawlers an_url, @max_depth, @allowed_urls, 
-        @black_list, @max_concurrency_level,
-        @requests_delay, @requests_deviation,
-        @search_all_urls, @login_hash, @post_hash
+      _add_crawlers an_url
     end
   else
-    _add_crawlers urls, @max_depth, @allowed_urls, 
-      @black_list, @max_concurrency_level,
-      @requests_delay, @requests_deviation,
-      @search_all_urls, @login_hash, @post_hash
+    _add_crawlers urls
   end
 
   @crawlers.each do |crawler|
-    crawler.run
+    crawler.start
   end
 end
 
@@ -138,16 +82,25 @@ end
 #
 # Action:
 #   Creates and adds the crawler to the crawlers list
-def _add_crawlers urls, max_depth,
-  allowed_urls, black_list, 
-  max_concurrency_level, requests_delay,
-  requests_deviation, search_all_urls,
-  login, post
-  @crawlers.push Crawler.new @scrapers_hash.values, urls, 
-    max_depth, allowed_urls,
-    black_list, max_concurrency_level,
-    requests_delay, requests_deviation,
-    search_all_urls, login, post
+def _add_crawlers urls
+  
+  crawler = Crawley::BaseCrawler.new @debug 
+
+  crawler.instance_variable_set :@start_urls, urls  
+  crawler.instance_variable_set :@max_depth, @max_depth  
+  crawler.instance_variable_set :@allowed_urls, @allowed_urls  
+  crawler.instance_variable_set :@black_list, @black_list  
+  crawler.instance_variable_set :@max_concurrency_level, @max_concurrency_level  
+  crawler.instance_variable_set :@requests_deviation, @requests_deviation
+  crawler.instance_variable_set :@search_all_urls, @search_all_urls
+  crawler.instance_variable_set :@login, @login
+  crawler.instance_variable_set :@post, @post
+  crawler.instance_variable_set :@proxy_host, @proxy_host
+  crawler.instance_variable_set :@proxy_user, @proxy_user
+  crawler.instance_variable_set :@proxy_pass, @proxy_pass
+  crawler.instance_variable_set :@proxy_port, @proxy_port
+
+  @crawlers.push crawler
 end
 
 # Public Method
@@ -188,10 +141,11 @@ end
 # Public Method
 #
 # Params:
-#   miliseconds: TODO
+#   miliseconds: The deviation for the delay randomization
 #
 # Action:
-#   TODO
+#   Sets the request deviation time for the requests, must be inside the crawl
+#   statement
 def requests_deviation miliseconds=300
   @requests_deviation = miliseconds
 end
@@ -230,6 +184,17 @@ end
 #   Sets the crawler to use or not the black_list and allowed_urls
 def search_all_urls a_boolean=true
   @search_all_urls = a_boolean
+end
+
+# Public Method
+#
+# Params:
+#   a_boolean: A Boolean value, if true, the crawler is set in debug mode
+#
+# Actions:
+#   Sets the crawler's debug option
+def debug a_boolean=true
+  @debug = a_boolean
 end
 
 # Public Method
@@ -337,7 +302,52 @@ end
 #   Sets the value for the given parameter for the post action, must be inside
 #   the post statement
 def param param_name, &param_value_block
+  h = Hash.new
+  h[param_name] = param_value_block.call
+  h
+end
 
+# Public Method
+#
+# Params:
+#   an_url: An URL for the proxy
+#   proxy_values_block: A Block containing the required data for the proxy
+#
+# Example:
+#   crawl "somewhere" do
+#     proxy "my_proxy_url" do
+#       proxy_username "my_username"
+#       proxy_password "my_password"
+#       proxy_port 8080
+#     end
+#     #...
+#   end
+#
+# Actions:
+#   Sets the proxy information for the crawler, must be inside the crawl
+#   statement
+def proxy an_url, &proxy_values_block
+  @proxy_host = an_url
+  proxy_values_block.call
+end
+
+# Public Method
+#
+# Params:
+#   p_user: A String containing the username for the proxy
+#
+# Actions:
+#   Sets the username for the proxy
+def proxy_username p_user=""
+  @proxy_username = p_user
+end
+
+def proxy_password p_pass=""
+  @proxy_password = p_pass
+end
+
+def proxy_port p_port=80
+  @proxy_port = p_port
 end
 
 # Public Method
@@ -364,7 +374,11 @@ end
 def table table_name, &fields_block
   @selectors_hash = Hash.new
   fields_block.call
-  @scrapers_hash[table_name] = Scraper.new @selectors_hash, Table.new(table_name, @selectors_hash) 
+  scraper = Crawley::BaseScraper.new
+  scraper.instance_variable_set :@selectors, @selectors_hash
+  scraper.instance_variable_set :@tables, 
+    (scraper.instance_variable_get :@tables).push(Crawley::Table.new table_name, @selectors_hash)
+  @scrapers_hash[table_name] = scraper 
 end
 
 # Public Method
@@ -394,6 +408,10 @@ if __FILE__ == $0
     #to make it false just call it
     #search_all_urls false   
 
+    debug                           #Optional: defaults in false,
+    #to make it true, call it
+
+
     login "login_url" do            #Optional: defaults in {}
       username "username"
       password "password"
@@ -409,6 +427,12 @@ if __FILE__ == $0
 
     post "another_url" do
       {'param_3' => 'value_3'}
+    end
+    
+    proxy "an_url" do               #Optional: defaults to nothing
+      proxy_username "username"
+      proxy_password "password"
+      proxy_port 80 
     end
 
     table "MI_TABLA" do             #Required
