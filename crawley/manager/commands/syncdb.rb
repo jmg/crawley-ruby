@@ -1,4 +1,8 @@
+require 'rubygems'
+require 'data_mapper'
+require 'dm-migrations'
 require_relative 'base'
+
 
 module Crawley
 
@@ -11,7 +15,14 @@ module Crawley
         end
         
         def run
-            puts "sycdb cmd"
+        
+            DataMapper::Logger.new($stdout, :debug)
+            DataMapper.setup(:default, 'sqlite::memory:')
+
+            curr_dir = Dir.pwd
+            DataMapper.setup(:default, 'sqlite:///' + curr_dir + '/base.db')
+        
+            DataMapper.auto_migrate!
         end
         
     end

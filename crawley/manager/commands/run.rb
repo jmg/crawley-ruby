@@ -11,7 +11,10 @@ module Crawley
         end
         
         def run
-            puts "run cmd"
+        
+            crawler = PypiCrawler.new true
+            crawler.start
+            
         end
         
     end
