@@ -3,15 +3,15 @@ require 'crawley'
 #Example implementation of the DSL using the full spectrum of the
 #possibilities
 crawl "http://pypi.python.org/pypi/cilantro/0.9b4" do #Required
-    max_depth 2                     #Optional: defaults in 0
-    allowed_urls []                 #Optional: defaults in []
-    black_list []                   #Optional: defaults in []
-    max_concurrency_level 1000      #Optional: defaults in 25
-    requests_delay 1000             #Optional: defaults in 100
-    requests_deviation 1000         #Optional: defaults in 300
-    search_all_urls                 #Optional: defaults in true, 
-    #to make it false just call it
-    #search_all_urls false   
+  max_depth 2                     #Optional: defaults in 0
+  allowed_urls []                 #Optional: defaults in []
+  black_list []                   #Optional: defaults in []
+  max_concurrency_level 1000      #Optional: defaults in 25
+  requests_delay 1000             #Optional: defaults in 100
+  requests_deviation 1000         #Optional: defaults in 300
+  search_all_urls                 #Optional: defaults in true, 
+  #to make it false just call it
+  #search_all_urls false   
 
   debug                           #Optional: defaults in false,
   #to make it true, call it
