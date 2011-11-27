@@ -5,9 +5,9 @@ module Crawley
 
     def initialize name, selectors
       @name = name
-      Table.storage_names[:default] = @name
+      DSLTable.storage_names[:default] = @name
       selectors.keys.each do |key|
-        Table.property key, key.class 
+        DSLTable.property key, key.class 
       end
     end
   end
