@@ -21,13 +21,4 @@ class PypiCrawler < BaseCrawler
     #specify your maximum crawling depth level
     @@max_depth = 1
 
-end    
-
-def run_crawler
-    crawler = PypiCrawler.new true
-    crawler.start
-end
-
-if __FILE__ == $0
-    run_crawler
 end

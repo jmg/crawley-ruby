@@ -1,12 +1,4 @@
-require 'rubygems'
-require 'data_mapper'
-require 'dm-migrations'
-
-DataMapper::Logger.new($stdout, :debug)
-DataMapper.setup(:default, 'sqlite::memory:')
-
-curr_dir = Dir.pwd
-DataMapper.setup(:default, 'sqlite:///' + curr_dir + '/base.db')
+require 'crawley'
 
 class Package
     include DataMapper::Resource
@@ -15,5 +7,3 @@ class Package
     property :package,      String
     property :description,  String    
 end
-
-DataMapper.auto_migrate!
