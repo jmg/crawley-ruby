@@ -1,4 +1,4 @@
-require_relative 'entity.rb'
+require_relative '../persistance/realtional/databases.rb'
 
 module Crawley
   class DSLTable < Entity
