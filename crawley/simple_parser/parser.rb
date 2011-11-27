@@ -22,6 +22,7 @@ require_relative 'scraping_table.rb'
 @requests_deviation = 300
 @search_all_urls = true
 @debug = false
+@mapping_action = nil
 
 # Public Method
 #
@@ -390,5 +391,32 @@ end
 #   Sets the fields data for generating the tables and scrapers, must be inside
 #   a table statement
 def field field_name, &selector_block
-  @selectors_hash[field_name] = selector_block.call
+  @mapping_property = nil
+  xpath = selector_block.call
+  @selectors_hash[field_name] = [xpath, @mapping_property.clone]
+end
+
+# Public Method
+#
+# Params:
+#   mapping_action_block: A Block containing any custom action you want when
+#     storing the data field, must contain 1 argument
+#
+# Example:
+#   crawl "somewhere" do
+#     table "my_table" do
+#       field "my_field"
+#         field_mapping_action { |d| d.lower }
+#         "/some/xpath/to/my/data"
+#       end
+#       #...
+#     end
+#     #...
+#   end
+#
+# Actions:
+#   Sets the mapping custom action before storing the data, must be inside a
+#   field statement, must be the first line inside the field statement if used
+def field_mapping_action &mapping_action_block
+  @mapping_action = Proc.new mapping_action_block
 end

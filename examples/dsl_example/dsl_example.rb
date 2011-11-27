@@ -40,16 +40,17 @@ crawl "http://pypi.python.org/pypi/cilantro/0.9b4" do #Required
     proxy_port 80 
   end
 
-  table "MI_TABLA" do             #Required
-    field "MI_CAMPO_0" do         #Required
+  table "MY_TABLE" do             #Required
+    field "MY_FIELD_0" do         #Required
+      field_mapping_action { |e| e.lower }          #Optional
       "/html/body/div[5]/div/div/div[3]/ul/li/span"
     end
 
-    field "MI_CAMPO_1" do
+    field "MY_FIELD_1" do
       "/html/body/div[5]/div/div/div[3]/ul/li[3]/span"
     end
 
-    field "MI_CAMPO_2" do
+    field "MY_FIELD_2" do
       "/html/body/div[5]/div/div/div[3]/ul/li[4]/span"
     end
   end
