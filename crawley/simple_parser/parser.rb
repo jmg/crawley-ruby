@@ -22,6 +22,7 @@ require_relative 'scraping_table.rb'
 @requests_deviation = 300
 @search_all_urls = true
 @debug = false
+@mapping_action = nil
 
 # Public Method
 #
@@ -390,61 +391,32 @@ end
 #   Sets the fields data for generating the tables and scrapers, must be inside
 #   a table statement
 def field field_name, &selector_block
-  @selectors_hash[field_name] = selector_block.call
+  @mapping_property = nil
+  xpath = selector_block.call
+  @selectors_hash[field_name] = [xpath, @mapping_property.clone]
 end
-if __FILE__ == $0
-  #Example implementation of the DSL using the full spectrum of the
-  #possibilities
-  crawl "http://pypi.python.org/pypi/cilantro/0.9b4" do #Required
-    max_depth 2                     #Optional: defaults in 0
-    allowed_urls []                 #Optional: defaults in []
-    black_list []                   #Optional: defaults in []
-    max_concurrency_level 1000      #Optional: defaults in 25
-    requests_delay 1000             #Optional: defaults in 100
-    requests_deviation 1000         #Optional: defaults in 300
-    search_all_urls                 #Optional: defaults in true, 
-    #to make it false just call it
-    #search_all_urls false   
 
-    debug                           #Optional: defaults in false,
-    #to make it true, call it
-
-
-    login "login_url" do            #Optional: defaults in {}
-      username "username"
-      password "password"
-      login_param "param_name" do
-        "value"
-      end
-      #  ...
-    end
-
-    post "an_url" do                #Optional: defaults in {}
-      {'param_1' => 'value_1', 'param_2' => 'value_2'}
-    end
-
-    post "another_url" do
-      {'param_3' => 'value_3'}
-    end
-    
-    proxy "an_url" do               #Optional: defaults to nothing
-      proxy_username "username"
-      proxy_password "password"
-      proxy_port 80 
-    end
-
-    table "MI_TABLA" do             #Required
-      field "MI_CAMPO_0" do         #Required
-        "/html/body/div[5]/div/div/div[3]/ul/li/span"
-      end
-
-      field "MI_CAMPO_1" do
-        "/html/body/div[5]/div/div/div[3]/ul/li[3]/span"
-      end
-
-      field "MI_CAMPO_2" do
-        "/html/body/div[5]/div/div/div[3]/ul/li[4]/span"
-      end
-    end
-  end
+# Public Method
+#
+# Params:
+#   mapping_action_block: A Block containing any custom action you want when
+#     storing the data field, must contain 1 argument
+#
+# Example:
+#   crawl "somewhere" do
+#     table "my_table" do
+#       field "my_field"
+#         field_mapping_action { |d| d.lower }
+#         "/some/xpath/to/my/data"
+#       end
+#       #...
+#     end
+#     #...
+#   end
+#
+# Actions:
+#   Sets the mapping custom action before storing the data, must be inside a
+#   field statement, must be the first line inside the field statement if used
+def field_mapping_action &mapping_action_block
+  @mapping_action = Proc.new mapping_action_block
 end
