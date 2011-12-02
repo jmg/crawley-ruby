@@ -62,3 +62,29 @@ class PypiCrawler < BaseCrawler
 
 end    
 ```
+-------------------------------------------------------------------
+
+### Or Write it with our DSL
+
+```ruby
+""" my_project.rb """
+
+require 'rubygems'
+require 'crawley'
+
+crawl "http://www.somewebsite.com" do
+  max_depth 1
+  debug
+
+  table "MY_SCRAPED_DATA" do
+    field "TITLE" do
+      field_mapping_action { |e| e.upper }
+      "/html/body/h1"
+    end
+
+    field "TEXT" do
+      "/html/p[0]"
+    end
+  end
+end
+```
