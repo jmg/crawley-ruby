@@ -391,9 +391,9 @@ end
 #   Sets the fields data for generating the tables and scrapers, must be inside
 #   a table statement
 def field field_name, &selector_block
-  @mapping_property = nil
+  @mapping_action = nil
   xpath = selector_block.call
-  @selectors_hash[field_name] = [xpath, @mapping_property.clone]
+  @selectors_hash[field_name] = [xpath, @mapping_action.clone]
 end
 
 # Public Method
