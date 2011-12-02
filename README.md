@@ -83,7 +83,7 @@ crawl "http://www.somewebsite.com" do
     end
 
     field "TEXT" do
-      "/html/p[0]"
+      "/html/body/p[0]"
     end
   end
 end
